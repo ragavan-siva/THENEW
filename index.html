@@ -320,7 +320,7 @@
           <path d="M17.8 19.2L16 11l3.5-3.5C21 6 21 4 19.5 2.5c-1.5-1.5-3.5-1.5-5 0L11 6 2.8 4.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 2 2 2 2 1-1v-3l3-2 5.2 7.3c.3.4.8.5 1.3.3l.5-.3c.4-.2.6-.6.5-1.1z"/>
         </svg>
       </div>
-      <span class="font-heading font-700 text-xl" style="color:#0f1d3b;font-weight:700;letter-spacing:-0.3px;">SR <span style="background:linear-gradient(135deg,#2563eb,#818cf8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Travel Services</span></span>
+      <span class="font-heading font-700 text-xl" style="color:#0f1d3b;font-weight:700;letter-spacing:-0.3px;">SR <span style="background:linear-gradient(135deg,#2563eb,#818cf8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Travels</span></span>
     </a>
 
     <!-- Desktop Nav -->
@@ -354,8 +354,6 @@
 
 <!-- ============ HERO ============ -->
 <section id="home" class="relative min-h-screen flex items-center overflow-hidden" style="background:linear-gradient(160deg,#fafcff 0%,#eef2ff 55%,#f0f7ff 100%); padding-top: 80px;">
-  <!-- Hero bg image overlay -->
-  <div class="absolute inset-0 z-0 pointer-events-none" style="background-image:url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=1600&q=80&auto=format&fit=crop');background-size:cover;background-position:center 60%;opacity:0.055;"></div>
   <!-- Blobs -->
   <div class="blob blob-blue" style="width:600px;height:600px;top:-120px;right:-100px;animation-delay:0s;"></div>
   <div class="blob blob-violet" style="width:400px;height:400px;bottom:-80px;left:-60px;animation-delay:2s;"></div>
@@ -506,11 +504,7 @@
 
     <div class="grid md:grid-cols-3 gap-8">
       <!-- Service 1: Flights -->
-      <div class="service-card reveal" style="padding:0;overflow:hidden;">
-        <div class="w-full h-44 overflow-hidden" style="border-radius:20px 20px 0 0;">
-          <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=700&q=80&auto=format&fit=crop" alt="Flight booking" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;" onmouseover="this.style.transform='scale(1.07)'" onmouseout="this.style.transform='scale(1)'"/>
-        </div>
-        <div class="p-8">
+      <div class="service-card p-8 reveal">
         <div class="service-icon-wrap mb-6" style="background:linear-gradient(135deg,#1a3a8f 0%,#2563eb 100%);">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
             <path d="M17.8 19.2L16 11l3.5-3.5C21 6 21 4 19.5 2.5c-1.5-1.5-3.5-1.5-5 0L11 6 2.8 4.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 2 2 2 2 1-1v-3l3-2 5.2 7.3c.3.4.8.5 1.3.3l.5-.3c.4-.2.6-.6.5-1.1z"/>
@@ -537,19 +531,14 @@
         <a href="#contact" class="mt-8 flex items-center gap-2 text-sm font-medium" style="color:#2563eb;font-family:'Poppins',sans-serif;font-weight:600;">
           Book Now <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
-        </div>
       </div>
 
       <!-- Service 2: Visa -->
-      <div class="service-card reveal" style="transition-delay:0.15s;padding:0;overflow:hidden;">
+      <div class="service-card p-8 reveal" style="transition-delay:0.15s;">
         <!-- Featured badge -->
-        <div class="absolute top-5 right-5" style="z-index:2;">
+        <div class="absolute top-5 right-5">
           <div class="badge" style="background:linear-gradient(135deg,#1a3a8f,#4f46e5);color:#fff;font-size:11px;">Popular</div>
         </div>
-        <div class="w-full h-44 overflow-hidden" style="border-radius:20px 20px 0 0;">
-          <img src="https://images.unsplash.com/photo-1530521954074-e64f6810b32d?w=700&q=80&auto=format&fit=crop" alt="Visa services passport" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;" onmouseover="this.style.transform='scale(1.07)'" onmouseout="this.style.transform='scale(1)'"/>
-        </div>
-        <div class="p-8">
         <div class="service-icon-wrap mb-6" style="background:linear-gradient(135deg,#4f46e5 0%,#818cf8 100%);">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
             <rect x="2" y="5" width="20" height="14" rx="2"/><path d="M16 10h2M16 14h2M6 10h6M6 14h4"/>
@@ -576,15 +565,10 @@
         <a href="#contact" class="mt-8 flex items-center gap-2 text-sm font-medium" style="color:#4f46e5;font-family:'Poppins',sans-serif;font-weight:600;">
           Apply Now <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
-        </div>
       </div>
 
       <!-- Service 3: Attestation -->
-      <div class="service-card reveal" style="transition-delay:0.3s;padding:0;overflow:hidden;">
-        <div class="w-full h-44 overflow-hidden" style="border-radius:20px 20px 0 0;">
-          <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=700&q=80&auto=format&fit=crop" alt="Document attestation" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;" onmouseover="this.style.transform='scale(1.07)'" onmouseout="this.style.transform='scale(1)'"/>
-        </div>
-        <div class="p-8">
+      <div class="service-card p-8 reveal" style="transition-delay:0.3s;">
         <div class="service-icon-wrap mb-6" style="background:linear-gradient(135deg,#0891b2 0%,#2563eb 100%);">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><polyline points="9 15 12 18 15 15"/><line x1="12" y1="12" x2="12" y2="18"/>
@@ -611,7 +595,6 @@
         <a href="#contact" class="mt-8 flex items-center gap-2 text-sm font-medium" style="color:#0891b2;font-family:'Poppins',sans-serif;font-weight:600;">
           Get Started <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
-        </div>
       </div>
     </div>
   </div>
@@ -628,14 +611,9 @@
         <h2 class="font-heading mb-6" style="font-size:clamp(1.8rem,4vw,2.6rem);font-weight:800;color:#0f1d3b;letter-spacing:-0.5px;">
           Handled by Experts,<br/><span class="grad-text">Trusted by Thousands</span>
         </h2>
-        <p class="text-slate-500 mb-6 leading-relaxed" style="font-size:16px;">
+        <p class="text-slate-500 mb-8 leading-relaxed" style="font-size:16px;">
           SR Travels is built on years of expertise in travel and documentation services. We combine deep knowledge with a client-first approach to deliver results — every single time.
         </p>
-        <!-- Photo collage -->
-        <div class="grid grid-cols-2 gap-3 mb-8 rounded-2xl overflow-hidden">
-          <img src="https://images.unsplash.com/photo-1488085061387-422e29b40080?w=500&q=80&auto=format&fit=crop" alt="Travel destinations" class="w-full h-40 object-cover rounded-xl" style="transition:transform 0.4s ease;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'"/>
-          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&q=80&auto=format&fit=crop" alt="Professional service" class="w-full h-40 object-cover rounded-xl" style="transition:transform 0.4s ease;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'"/>
-        </div>
         <a href="#contact" class="btn-primary">Talk to an Expert</a>
       </div>
 
@@ -788,34 +766,6 @@
         Trusted by Real <span class="grad-text">Travellers</span>
       </h2>
       <p class="text-slate-500 max-w-lg mx-auto" style="font-size:16px;">Don't take our word for it — hear from clients who've experienced the SR Travels difference.</p>
-    </div>
-
-    <!-- Destination image strip -->
-    <div class="flex gap-4 mb-14 overflow-hidden reveal">
-      <div class="relative flex-1 min-w-0 rounded-2xl overflow-hidden h-40 group">
-        <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=500&q=80&auto=format&fit=crop" alt="Dubai" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
-        <div class="absolute inset-0 flex items-end p-4" style="background:linear-gradient(to top,rgba(15,29,59,0.65),transparent);">
-          <span class="text-white font-heading font-700 text-sm" style="font-weight:700;">Dubai, UAE</span>
-        </div>
-      </div>
-      <div class="relative flex-1 min-w-0 rounded-2xl overflow-hidden h-40 group">
-        <img src="https://images.unsplash.com/photo-1586724237569-f3d0c1dee8c6?w=500&q=80&auto=format&fit=crop" alt="Qatar" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
-        <div class="absolute inset-0 flex items-end p-4" style="background:linear-gradient(to top,rgba(15,29,59,0.65),transparent);">
-          <span class="text-white font-heading font-700 text-sm" style="font-weight:700;">Doha, Qatar</span>
-        </div>
-      </div>
-      <div class="relative flex-1 min-w-0 rounded-2xl overflow-hidden h-40 group hidden sm:block">
-        <img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=500&q=80&auto=format&fit=crop" alt="Europe" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
-        <div class="absolute inset-0 flex items-end p-4" style="background:linear-gradient(to top,rgba(15,29,59,0.65),transparent);">
-          <span class="text-white font-heading font-700 text-sm" style="font-weight:700;">Europe</span>
-        </div>
-      </div>
-      <div class="relative flex-1 min-w-0 rounded-2xl overflow-hidden h-40 group hidden md:block">
-        <img src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=500&q=80&auto=format&fit=crop" alt="India" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
-        <div class="absolute inset-0 flex items-end p-4" style="background:linear-gradient(to top,rgba(15,29,59,0.65),transparent);">
-          <span class="text-white font-heading font-700 text-sm" style="font-weight:700;">India</span>
-        </div>
-      </div>
     </div>
 
     <div class="grid md:grid-cols-3 gap-6">
