@@ -65,6 +65,30 @@
     }
   </script>
   <style>
+    /* MOBILE FIXES */
+@media (max-width: 768px) {
+
+  body {
+    overflow-x: hidden;
+  }
+
+  .blob {
+    filter: blur(40px);
+  }
+
+  .glass,
+  .service-card,
+  .testimonial-card,
+  .trust-card {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .hero-plane {
+    width: 100%;
+  }
+
+}
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body { font-family: 'Poppins', sans-serif; background: #fff; color: #0f1d3b; overflow-x: hidden; }
@@ -452,7 +476,7 @@
         </div>
 
         <!-- Floating visa card -->
-        <div class="absolute -right-10 top-6 glass rounded-2xl p-4 shadow-card z-20" style="min-width:170px;animation:float 6s ease-in-out 1s infinite;">
+        <div class="hidden md:block absolute -right-10 top-6 glass rounded-2xl p-4 shadow-card z-20" style="min-width:170px;animation:float 6s ease-in-out 1s infinite;">
           <div class="flex items-center gap-3 mb-3">
             <div class="service-icon-wrap w-9 h-9" style="background:linear-gradient(135deg,#1a3a8f,#4f46e5);">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -468,7 +492,7 @@
         </div>
 
         <!-- Floating attestation pill -->
-        <div class="absolute -left-10 bottom-8 glass rounded-2xl p-4 shadow-card z-20" style="min-width:180px;animation:float 7s ease-in-out 0.5s infinite;">
+        <div class="hidden md:block absolute -left-10 bottom-8 glass rounded-2xl p-4 shadow-card z-20" style="min-width:180px;animation:float 7s ease-in-out 0.5s infinite;">
           <div class="flex items-center gap-3">
             <div class="service-icon-wrap w-9 h-9 flex-shrink-0" style="background:linear-gradient(135deg,#0891b2,#2563eb);">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
