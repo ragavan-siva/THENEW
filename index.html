@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SR Travels — Flight Booking, Visa & Attestation Services</title>
+  <meta name="description" content="SR Travels offers premium Flight Ticket Booking, Visa Services, and Certificate Attestation. Fast, reliable, and transparent travel documentation services." />
+  <meta name="keywords" content="SR Travels, flight booking, visa services, certificate attestation, travel agency, document attestation" />
+  <meta property="og:title" content="SR Travels — Your Trusted Travel Partner" />
+  <meta property="og:description" content="Premium Flight Booking, Visa & Attestation Services" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            heading: ['Poppins', 'sans-serif'],
+            body: ['Poppins', 'sans-serif'],
+          },
+          colors: {
+            navy: '#0f1d3b',
+            cobalt: '#1a3a8f',
+            azure: '#2563eb',
+            sky: '#38bdf8',
+            frost: '#e8f0fe',
+            mist: '#f0f4ff',
+          },
+          animation: {
+            'float': 'float 6s ease-in-out infinite',
+            'float-slow': 'float 9s ease-in-out infinite',
+            'pulse-soft': 'pulseSoft 3s ease-in-out infinite',
+            'slide-up': 'slideUp 0.6s ease forwards',
+            'fade-in': 'fadeIn 0.8s ease forwards',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-18px)' },
+            },
+            pulseSoft: {
+              '0%, 100%': { opacity: '0.7' },
+              '50%': { opacity: '1' },
+            },
+            slideUp: {
+              from: { opacity: '0', transform: 'translateY(30px)' },
+              to: { opacity: '1', transform: 'translateY(0)' },
+            },
+            fadeIn: {
+              from: { opacity: '0' },
+              to: { opacity: '1' },
+            },
+          },
+          boxShadow: {
+            'glass': '0 8px 32px rgba(31, 38, 135, 0.12)',
+            'card': '0 4px 24px rgba(15, 29, 59, 0.08)',
+            'card-hover': '0 12px 40px rgba(37, 99, 235, 0.18)',
+            'glow': '0 0 40px rgba(37, 99, 235, 0.25)',
+          },
+          backdropBlur: {
+            xs: '4px',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Poppins', sans-serif; background: #fff; color: #0f1d3b; overflow-x: hidden; }
+    h1, h2, h3, h4, h5, .font-heading { font-family: 'Poppins', sans-serif; }
+
+    /* Blobs */
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+      animation: float 8s ease-in-out infinite;
+    }
+    .blob-blue { background: radial-gradient(circle, rgba(37,99,235,0.18) 0%, rgba(99,102,241,0.1) 100%); }
+    .blob-violet { background: radial-gradient(circle, rgba(124,58,237,0.13) 0%, rgba(59,130,246,0.08) 100%); }
+    .blob-sky { background: radial-gradient(circle, rgba(56,189,248,0.15) 0%, rgba(37,99,235,0.06) 100%); }
+
+    /* Glassmorphism */
+    .glass {
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.55);
+    }
+    .glass-dark {
+      background: rgba(15, 29, 59, 0.7);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    /* Navbar */
+    .navbar-glass {
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(37, 99, 235, 0.08);
+    }
+
+    /* Service cards */
+    .service-card {
+      background: #fff;
+      border: 1px solid rgba(37,99,235,0.1);
+      border-radius: 20px;
+      transition: all 0.35s cubic-bezier(0.4,0,0.2,1);
+      box-shadow: 0 4px 24px rgba(15,29,59,0.07);
+      position: relative;
+      overflow: hidden;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(37,99,235,0.04) 0%, rgba(124,58,237,0.04) 100%);
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      border-radius: 20px;
+    }
+    .service-card:hover::before { opacity: 1; }
+    .service-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 50px rgba(37,99,235,0.14);
+      border-color: rgba(37,99,235,0.25);
+    }
+    .service-icon-wrap {
+      width: 64px; height: 64px;
+      border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      transition: transform 0.3s ease;
+    }
+    .service-card:hover .service-icon-wrap { transform: scale(1.1) rotate(-4deg); }
+
+    /* Trust card */
+    .trust-card {
+      border-radius: 16px;
+      background: #fff;
+      border: 1px solid rgba(37,99,235,0.09);
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 16px rgba(15,29,59,0.05);
+    }
+    .trust-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(37,99,235,0.2);
+      box-shadow: 0 8px 32px rgba(37,99,235,0.1);
+    }
+
+    /* Timeline step */
+    .step-dot {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700; font-size: 18px;
+    }
+    .step-connector {
+      flex: 1;
+      height: 2px;
+      background: linear-gradient(90deg, #2563eb, #818cf8);
+      margin: 0 8px;
+    }
+
+    /* Testimonial */
+    .testimonial-card {
+      background: #fff;
+      border: 1px solid rgba(37,99,235,0.1);
+      border-radius: 20px;
+      box-shadow: 0 4px 24px rgba(15,29,59,0.07);
+      transition: all 0.3s ease;
+    }
+    .testimonial-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(37,99,235,0.12);
+    }
+
+    /* Input */
+    .form-input {
+      width: 100%;
+      padding: 14px 18px;
+      border-radius: 12px;
+      border: 1.5px solid rgba(37,99,235,0.15);
+      background: rgba(240,244,255,0.7);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      color: #0f1d3b;
+      outline: none;
+      transition: border-color 0.25s, box-shadow 0.25s;
+    }
+    .form-input:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+      background: #fff;
+    }
+    .form-input::placeholder { color: #94a3b8; }
+
+    /* Gradient text */
+    .grad-text {
+      background: linear-gradient(135deg, #1a3a8f 0%, #2563eb 50%, #818cf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* CTA Button */
+    .btn-primary {
+      background: linear-gradient(135deg, #1a3a8f 0%, #2563eb 100%);
+      color: #fff;
+      border-radius: 12px;
+      padding: 14px 28px;
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      font-size: 15px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(37,99,235,0.3);
+      display: inline-flex; align-items: center; gap: 8px;
+      cursor: pointer;
+      border: none;
+      text-decoration: none;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(37,99,235,0.45);
+      background: linear-gradient(135deg, #1e44c0 0%, #3b75f5 100%);
+    }
+    .btn-ghost {
+      background: transparent;
+      color: #1a3a8f;
+      border-radius: 12px;
+      padding: 13px 28px;
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      font-size: 15px;
+      transition: all 0.3s ease;
+      border: 1.5px solid rgba(37,99,235,0.35);
+      display: inline-flex; align-items: center; gap: 8px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .btn-ghost:hover {
+      background: rgba(37,99,235,0.06);
+      border-color: #2563eb;
+      transform: translateY(-2px);
+    }
+
+    /* Section reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* Mobile menu */
+    #mobile-menu { display: none; }
+    #mobile-menu.open { display: block; }
+
+    /* WhatsApp float */
+    .wa-float {
+      position: fixed;
+      bottom: 28px; right: 28px;
+      z-index: 999;
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #25d366, #128c7e);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 6px 24px rgba(37,211,102,0.45);
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-decoration: none;
+    }
+    .wa-float:hover {
+      transform: scale(1.12);
+      box-shadow: 0 10px 36px rgba(37,211,102,0.55);
+    }
+
+    /* Hero illustration */
+    .hero-plane {
+      animation: float 5s ease-in-out infinite;
+    }
+    .hero-cloud-1 { animation: float 7s ease-in-out infinite; }
+    .hero-cloud-2 { animation: float 9s ease-in-out 1s infinite; }
+
+    /* Gradient section bg */
+    .section-alt { background: linear-gradient(180deg, #f8faff 0%, #eef2ff 100%); }
+
+    /* Footer */
+    .footer-bg {
+      background: linear-gradient(160deg, #0f1d3b 0%, #1a2f5e 60%, #0f1d3b 100%);
+    }
+
+    /* Badge pill */
+    .badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 6px 14px;
+      border-radius: 100px;
+      font-size: 13px; font-weight: 500;
+      font-family: 'DM Sans', sans-serif;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ============ NAVBAR ============ -->
+<nav class="navbar-glass fixed top-0 left-0 right-0 z-50 transition-shadow" id="navbar">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    <!-- Logo -->
+    <a href="#" class="flex items-center gap-2.5">
+      <div class="w-9 h-9 rounded-xl flex items-center justify-center" style="background:linear-gradient(135deg,#1a3a8f,#2563eb);">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17.8 19.2L16 11l3.5-3.5C21 6 21 4 19.5 2.5c-1.5-1.5-3.5-1.5-5 0L11 6 2.8 4.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 2 2 2 2 1-1v-3l3-2 5.2 7.3c.3.4.8.5 1.3.3l.5-.3c.4-.2.6-.6.5-1.1z"/>
+        </svg>
+      </div>
+      <span class="font-heading font-700 text-xl" style="color:#0f1d3b;font-weight:700;letter-spacing:-0.3px;">SR <span style="background:linear-gradient(135deg,#2563eb,#818cf8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Travels</span></span>
+    </a>
+
+    <!-- Desktop Nav -->
+    <ul class="hidden md:flex items-center gap-8">
+      <li><a href="#services" class="text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors" style="font-family:'Poppins',sans-serif;">Services</a></li>
+      <li><a href="#why-us" class="text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors" style="font-family:'Poppins',sans-serif;">Why Us</a></li>
+      <li><a href="#process" class="text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors" style="font-family:'Poppins',sans-serif;">Process</a></li>
+      <li><a href="#testimonials" class="text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors" style="font-family:'Poppins',sans-serif;">Reviews</a></li>
+      <li><a href="#contact" class="btn-primary" style="padding:10px 22px;font-size:14px;">Get Quote</a></li>
+    </ul>
+
+    <!-- Hamburger -->
+    <button class="md:hidden flex flex-col gap-1.5 p-2" id="menu-btn" aria-label="Open menu">
+      <span class="w-6 h-0.5 bg-navy rounded transition-all" id="bar1"></span>
+      <span class="w-6 h-0.5 bg-navy rounded transition-all" id="bar2"></span>
+      <span class="w-4 h-0.5 bg-navy rounded transition-all" id="bar3"></span>
+    </button>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="md:hidden px-6 pb-5 border-t border-blue-50">
+    <ul class="flex flex-col gap-4 pt-5">
+      <li><a href="#services" class="text-sm font-medium text-slate-700 block" onclick="closeMobileMenu()">Services</a></li>
+      <li><a href="#why-us" class="text-sm font-medium text-slate-700 block" onclick="closeMobileMenu()">Why Us</a></li>
+      <li><a href="#process" class="text-sm font-medium text-slate-700 block" onclick="closeMobileMenu()">Process</a></li>
+      <li><a href="#testimonials" class="text-sm font-medium text-slate-700 block" onclick="closeMobileMenu()">Reviews</a></li>
+      <li><a href="#contact" class="btn-primary w-full justify-center mt-2" onclick="closeMobileMenu()">Get Quote</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section id="home" class="relative min-h-screen flex items-center overflow-hidden" style="background:linear-gradient(160deg,#fafcff 0%,#eef2ff 55%,#f0f7ff 100%); padding-top: 80px;">
+  <!-- Hero bg image overlay -->
+  <div class="absolute inset-0 z-0 pointer-events-none" style="background-image:url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=1600&q=80&auto=format&fit=crop');background-size:cover;background-position:center 60%;opacity:0.055;"></div>
+  <!-- Blobs -->
+  <div class="blob blob-blue" style="width:600px;height:600px;top:-120px;right:-100px;animation-delay:0s;"></div>
+  <div class="blob blob-violet" style="width:400px;height:400px;bottom:-80px;left:-60px;animation-delay:2s;"></div>
+  <div class="blob blob-sky" style="width:300px;height:300px;top:40%;left:40%;animation-delay:4s;"></div>
+
+  <div class="max-w-7xl mx-auto px-6 py-20 lg:py-0 grid lg:grid-cols-2 gap-12 items-center relative z-10 w-full">
+    <!-- Left -->
+    <div style="animation: slideUp 0.8s ease forwards;">
+      <div class="badge mb-6" style="background:rgba(37,99,235,0.08);color:#2563eb;border:1px solid rgba(37,99,235,0.15);">
+        <span style="width:6px;height:6px;border-radius:50%;background:#2563eb;display:inline-block;"></span>
+        Trusted by 5,000+ Clients Across the GCC
+      </div>
+      <h1 class="font-heading mb-6 leading-tight" style="font-size:clamp(2.4rem,5vw,3.8rem);font-weight:800;color:#0f1d3b;letter-spacing:-1px;">
+        Your Trusted Partner for<br/>
+        <span class="grad-text">Travel & Documentation</span>
+      </h1>
+      <p class="text-slate-500 mb-8 leading-relaxed" style="font-size:17px;max-width:480px;">
+        From seamless flight bookings to hassle-free visa applications and document attestation — SR Travels is your one-stop solution for all travel needs, handled by experts you can rely on.
+      </p>
+      <div class="flex flex-wrap gap-4">
+        <a href="#contact" class="btn-primary">
+          Get a Free Quote
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="https://wa.me/919999999999" class="btn-ghost" target="_blank">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="color:#25d366;">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.097.543 4.066 1.494 5.779L.058 23.625c-.072.383.237.736.627.709l6.078-.376C8.212 24.63 10.06 25 12 25c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.9 0-3.693-.487-5.258-1.341l-.372-.21-3.894.24.303-3.758-.241-.389C1.505 14.856 1 13.485 1 12 1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 10-11 10z"/>
+          </svg>
+          Chat on WhatsApp
+        </a>
+      </div>
+      <!-- Stats -->
+      <div class="mt-12 flex flex-wrap gap-6">
+        <div>
+          <div class="font-heading text-2xl font-800" style="color:#0f1d3b;font-weight:800;">5K+</div>
+          <div class="text-slate-500 text-sm">Happy Clients</div>
+        </div>
+        <div style="width:1px;background:rgba(37,99,235,0.15);"></div>
+        <div>
+          <div class="font-heading text-2xl font-800" style="color:#0f1d3b;font-weight:800;">10+</div>
+          <div class="text-slate-500 text-sm">Years Experience</div>
+        </div>
+        <div style="width:1px;background:rgba(37,99,235,0.15);"></div>
+        <div>
+          <div class="font-heading text-2xl font-800" style="color:#0f1d3b;font-weight:800;">98%</div>
+          <div class="text-slate-500 text-sm">Success Rate</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right — Hero Illustration -->
+    <div class="hidden lg:flex items-center justify-center relative">
+      <!-- Card stack / illustration -->
+      <div class="relative w-full max-w-md">
+        <!-- Main card -->
+        <div class="glass rounded-3xl p-8 shadow-glass relative z-10" style="border:1px solid rgba(255,255,255,0.7);">
+          <!-- Flight card top -->
+          <div class="flex items-center justify-between mb-6">
+            <div>
+              <div class="text-xs text-slate-400 mb-1">DEPARTURE</div>
+              <div class="font-heading font-700 text-3xl" style="font-weight:700;color:#0f1d3b;">MAA</div>
+              <div class="text-sm text-slate-500">Chennai</div>
+            </div>
+            <!-- Plane path -->
+            <div class="flex-1 flex flex-col items-center mx-4">
+              <div class="w-full h-px bg-gradient-to-r from-blue-200 via-blue-400 to-violet-300 mb-2"></div>
+              <div class="hero-plane">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M17.8 19.2L16 11l3.5-3.5C21 6 21 4 19.5 2.5c-1.5-1.5-3.5-1.5-5 0L11 6 2.8 4.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 2 2 2 2 1-1v-3l3-2 5.2 7.3c.3.4.8.5 1.3.3l.5-.3c.4-.2.6-.6.5-1.1z"/>
+                </svg>
+              </div>
+              <div class="text-xs text-slate-400 mt-1">Direct</div>
+            </div>
+            <div>
+              <div class="text-xs text-slate-400 mb-1">ARRIVAL</div>
+              <div class="font-heading font-700 text-3xl" style="font-weight:700;color:#0f1d3b;">DXB</div>
+              <div class="text-sm text-slate-500">Dubai</div>
+            </div>
+          </div>
+          <div class="h-px w-full mb-5" style="background:repeating-linear-gradient(90deg,#e2e8f0,#e2e8f0 6px,transparent 6px,transparent 12px);"></div>
+          <div class="flex items-center justify-between">
+            <div>
+              <div class="text-xs text-slate-400 mb-1">PASSENGER</div>
+              <div class="font-medium text-slate-700" style="font-size:14px;">Ahmed Al-Rashid</div>
+            </div>
+            <div class="text-center">
+              <div class="text-xs text-slate-400 mb-1">CLASS</div>
+              <div class="badge" style="background:rgba(37,99,235,0.1);color:#2563eb;font-size:12px;">Economy</div>
+            </div>
+            <div class="text-right">
+              <div class="text-xs text-slate-400 mb-1">SEAT</div>
+              <div class="font-heading font-700 text-lg" style="color:#0f1d3b;font-weight:700;">14A</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Floating visa card -->
+        <div class="absolute -right-10 top-6 glass rounded-2xl p-4 shadow-card z-20" style="min-width:170px;animation:float 6s ease-in-out 1s infinite;">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="service-icon-wrap w-9 h-9" style="background:linear-gradient(135deg,#1a3a8f,#4f46e5);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="5" width="20" height="14" rx="2"/><path d="M16 10h2M16 14h2M6 10h6M6 14h4"/>
+              </svg>
+            </div>
+            <div>
+              <div class="text-xs text-slate-400">Visa Status</div>
+              <div class="text-sm font-medium" style="color:#0f1d3b;font-family:'Poppins',sans-serif;">Approved ✓</div>
+            </div>
+          </div>
+          <div class="text-xs text-slate-500">UAE Tourist Visa<br/>Valid: 30 Days</div>
+        </div>
+
+        <!-- Floating attestation pill -->
+        <div class="absolute -left-10 bottom-8 glass rounded-2xl p-4 shadow-card z-20" style="min-width:180px;animation:float 7s ease-in-out 0.5s infinite;">
+          <div class="flex items-center gap-3">
+            <div class="service-icon-wrap w-9 h-9 flex-shrink-0" style="background:linear-gradient(135deg,#0891b2,#2563eb);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>
+              </svg>
+            </div>
+            <div>
+              <div class="text-xs text-slate-400">Attestation</div>
+              <div class="text-sm font-medium" style="color:#0f1d3b;font-family:'Poppins',sans-serif;">Processing</div>
+              <div class="w-24 h-1 rounded-full mt-1.5" style="background:#e2e8f0;">
+                <div class="h-1 rounded-full" style="width:65%;background:linear-gradient(90deg,#2563eb,#818cf8);"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BG decoration ring -->
+        <div class="absolute inset-0 -z-10 rounded-3xl" style="background:linear-gradient(135deg,rgba(37,99,235,0.08),rgba(124,58,237,0.06));transform:scale(1.1);filter:blur(1px);"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICES ============ -->
+<section id="services" class="py-24 relative overflow-hidden" style="background:#fff;">
+  <div class="blob blob-blue" style="width:500px;height:500px;top:-200px;right:-150px;opacity:0.5;"></div>
+  <div class="max-w-7xl mx-auto px-6 relative z-10">
+    <div class="text-center mb-16 reveal">
+      <div class="badge mb-4" style="background:rgba(37,99,235,0.07);color:#2563eb;border:1px solid rgba(37,99,235,0.12);">Our Services</div>
+      <h2 class="font-heading mb-4" style="font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;color:#0f1d3b;letter-spacing:-0.5px;">Everything You Need,<br/><span class="grad-text">Under One Roof</span></h2>
+      <p class="text-slate-500 max-w-xl mx-auto" style="font-size:16px;">We handle the complexity so you can focus on what matters — your journey.</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8">
+      <!-- Service 1: Flights -->
+      <div class="service-card reveal" style="padding:0;overflow:hidden;">
+        <div class="w-full h-44 overflow-hidden" style="border-radius:20px 20px 0 0;">
+          <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=700&q=80&auto=format&fit=crop" alt="Flight booking" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;" onmouseover="this.style.transform='scale(1.07)'" onmouseout="this.style.transform='scale(1)'"/>
+        </div>
+        <div class="p-8">
+        <div class="service-icon-wrap mb-6" style="background:linear-gradient(135deg,#1a3a8f 0%,#2563eb 100%);">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17.8 19.2L16 11l3.5-3.5C21 6 21 4 19.5 2.5c-1.5-1.5-3.5-1.5-5 0L11 6 2.8 4.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 2 2 2 2 1-1v-3l3-2 5.2 7.3c.3.4.8.5 1.3.3l.5-.3c.4-.2.6-.6.5-1.1z"/>
+          </svg>
+        </div>
+        <h3 class="font-heading mb-3" style="font-size:1.25rem;font-weight:700;color:#0f1d3b;">Flight Ticket Booking</h3>
+        <p class="text-slate-500 mb-6 leading-relaxed" style="font-size:15px;">
+          We source the best fares across all major airlines for domestic and international routes. Economy, Business, or First Class — we've got you covered with verified bookings.
+        </p>
+        <ul class="space-y-2">
+          <li class="flex items-center gap-2 text-sm text-slate-500">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            All domestic & international routes
+          </li>
+          <li class="flex items-center gap-2 text-sm text-slate-500">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            Best price guarantee
+          </li>
+          <li class="flex items-center gap-2 text-sm text-slate-500">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            Instant confirmation & e-tickets
+          </li>
+        </ul>
+        <a href="#contact" class="mt-8 flex items-center gap-2 text-sm font-medium" style="color:#2563eb;font-family:'Poppins',sans-serif;font-weight:600;">
+          Book Now <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        </div>
+      </div>
+
+      <!-- Service 2: Visa -->
+      <div class="service-card reveal" style="transition-delay:0.15s;padding:0;overflow:hidden;">
+        <!-- Featured badge -->
+        <div class="absolute top-5 right-5" style="z-index:2;">
+          <div class="badge" style="background:linear-gradient(135deg,#1a3a8f,#4f46e5);color:#fff;font-size:11px;">Popular</div>
+        </div>
+        <div class="w-full h-44 overflow-hidden" style="border-radius:20px 20px 0 0;">
+          <img src="https://images.unsplash.com/photo-1530521954074-e64f6810b32d?w=700&q=80&auto=format&fit=crop" alt="Visa services passport" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;" onmouseover="this.style.transform='scale(1.07)'" onmouseout="this.style.transform='scale(1)'"/>
+        </div>
+        <div class="p-8">
+        <div class="service-icon-wrap mb-6" style="background:linear-gradient(135deg,#4f46e5 0%,#818cf8 100%);">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="5" width="20" height="14" rx="2"/><path d="M16 10h2M16 14h2M6 10h6M6 14h4"/>
+          </svg>
+        </div>
+        <h3 class="font-heading mb-3" style="font-size:1.25rem;font-weight:700;color:#0f1d3b;">Visa Services</h3>
+        <p class="text-slate-500 mb-6 leading-relaxed" style="font-size:15px;">
+          Tourist, work, student, or transit visas — our experts guide you through every step of the application process with precision and speed for 50+ countries.
+        </p>
+        <ul class="space-y-2">
+          <li class="flex items-center gap-2 text-sm text-slate-500">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#4f46e5" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            UAE, Qatar, Saudi, UK, Schengen & more
+          </li>
+          <li class="flex items-center gap-2 text-sm text-slate-500">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#4f46e5" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            Document checklist & submission support
+          </li>
+          <li class="flex items-center gap-2 text-sm text-slate-500">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#4f46e5" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            High visa approval rate
+          </li>
+        </ul>
+        <a href="#contact" class="mt-8 flex items-center gap-2 text-sm font-medium" style="color:#4f46e5;font-family:'Poppins',sans-serif;font-weight:600;">
+          Apply Now <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        </div>
+      </div>
+
+      <!-- Service 3: Attestation -->
+      <div class="service-card reveal" style="transition-delay:0.3s;padding:0;overflow:hidden;">
+        <div class="w-full h-44 overflow-hidden" style="border-radius:20px 20px 0 0;">
+          <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=700&q=80&auto=format&fit=crop" alt="Document attestation" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;" onmouseover="this.style.transform='scale(1.07)'" onmouseout="this.style.transform='scale(1)'"/>
+        </div>
+        <div class="p-8">
+        <div class="service-icon-wrap mb-6" style="background:linear-gradient(135deg,#0891b2 0%,#2563eb 100%);">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><polyline points="9 15 12 18 15 15"/><line x1="12" y1="12" x2="12" y2="18"/>
+          </svg>
+        </div>
+        <h3 class="font-heading mb-3" style="font-size:1.25rem;font-weight:700;color:#0f1d3b;">Certificate Attestation</h3>
+        <p class="text-slate-500 mb-6 leading-relaxed" style="font-size:15px;">
+          Educational, personal, and commercial document attestation handled end-to-end. We manage MEA, embassy, and HRD attestation with complete transparency.
+        </p>
+        <ul class="space-y-2">
+          <li class="flex items-center gap-2 text-sm text-slate-500">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#0891b2" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            Degree, birth & marriage certificates
+          </li>
+          <li class="flex items-center gap-2 text-sm text-slate-500">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#0891b2" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            MEA, HRD & Embassy attestation
+          </li>
+          <li class="flex items-center gap-2 text-sm text-slate-500">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#0891b2" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            Real-time status tracking
+          </li>
+        </ul>
+        <a href="#contact" class="mt-8 flex items-center gap-2 text-sm font-medium" style="color:#0891b2;font-family:'Poppins',sans-serif;font-weight:600;">
+          Get Started <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHY CHOOSE US ============ -->
+<section id="why-us" class="py-24 section-alt relative overflow-hidden">
+  <div class="blob blob-violet" style="width:400px;height:400px;bottom:-100px;left:-80px;opacity:0.6;"></div>
+  <div class="max-w-7xl mx-auto px-6 relative z-10">
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+      <!-- Left -->
+      <div class="reveal">
+        <div class="badge mb-4" style="background:rgba(37,99,235,0.07);color:#2563eb;border:1px solid rgba(37,99,235,0.12);">Why Choose Us</div>
+        <h2 class="font-heading mb-6" style="font-size:clamp(1.8rem,4vw,2.6rem);font-weight:800;color:#0f1d3b;letter-spacing:-0.5px;">
+          Handled by Experts,<br/><span class="grad-text">Trusted by Thousands</span>
+        </h2>
+        <p class="text-slate-500 mb-6 leading-relaxed" style="font-size:16px;">
+          SR Travels is built on years of expertise in travel and documentation services. We combine deep knowledge with a client-first approach to deliver results — every single time.
+        </p>
+        <!-- Photo collage -->
+        <div class="grid grid-cols-2 gap-3 mb-8 rounded-2xl overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1488085061387-422e29b40080?w=500&q=80&auto=format&fit=crop" alt="Travel destinations" class="w-full h-40 object-cover rounded-xl" style="transition:transform 0.4s ease;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'"/>
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&q=80&auto=format&fit=crop" alt="Professional service" class="w-full h-40 object-cover rounded-xl" style="transition:transform 0.4s ease;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'"/>
+        </div>
+        <a href="#contact" class="btn-primary">Talk to an Expert</a>
+      </div>
+
+      <!-- Right: Trust points -->
+      <div class="grid sm:grid-cols-2 gap-5">
+        <!-- Card 1 -->
+        <div class="trust-card p-6 reveal">
+          <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style="background:linear-gradient(135deg,rgba(37,99,235,0.12),rgba(79,70,229,0.08));">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+            </svg>
+          </div>
+          <h4 class="font-heading mb-2" style="font-weight:700;color:#0f1d3b;font-size:1rem;">Fast Processing</h4>
+          <p class="text-slate-500 text-sm leading-relaxed">We prioritize speed without compromising accuracy. Most services processed within 24–72 hours.</p>
+        </div>
+        <!-- Card 2 -->
+        <div class="trust-card p-6 reveal" style="transition-delay:0.1s;">
+          <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style="background:linear-gradient(135deg,rgba(79,70,229,0.12),rgba(129,140,248,0.08));">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4f46e5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+          <h4 class="font-heading mb-2" style="font-weight:700;color:#0f1d3b;font-size:1rem;">Reliable Service</h4>
+          <p class="text-slate-500 text-sm leading-relaxed">Over a decade of consistent, reliable service. We stand behind every transaction with full accountability.</p>
+        </div>
+        <!-- Card 3 -->
+        <div class="trust-card p-6 reveal" style="transition-delay:0.2s;">
+          <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style="background:linear-gradient(135deg,rgba(8,145,178,0.12),rgba(37,99,235,0.08));">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0891b2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+            </svg>
+          </div>
+          <h4 class="font-heading mb-2" style="font-weight:700;color:#0f1d3b;font-size:1rem;">Transparent Pricing</h4>
+          <p class="text-slate-500 text-sm leading-relaxed">No hidden fees. No surprises. You get a clear breakdown upfront before we begin any service.</p>
+        </div>
+        <!-- Card 4 -->
+        <div class="trust-card p-6 reveal" style="transition-delay:0.3s;">
+          <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style="background:linear-gradient(135deg,rgba(124,58,237,0.12),rgba(37,99,235,0.08));">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+            </svg>
+          </div>
+          <h4 class="font-heading mb-2" style="font-weight:700;color:#0f1d3b;font-size:1rem;">Expert Guidance</h4>
+          <p class="text-slate-500 text-sm leading-relaxed">Our seasoned professionals advise you at every step, ensuring accurate documentation and zero rejections.</p>
+        </div>
+        <!-- Card 5 -->
+        <div class="trust-card p-6 reveal sm:col-span-2" style="transition-delay:0.4s;">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style="background:linear-gradient(135deg,rgba(37,99,235,0.12),rgba(8,145,178,0.08));">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </div>
+            <div>
+              <h4 class="font-heading mb-1" style="font-weight:700;color:#0f1d3b;font-size:1rem;">Dedicated Client Support</h4>
+              <p class="text-slate-500 text-sm leading-relaxed">We assign a personal relationship manager to every client. Reach us via call, WhatsApp, or email — 7 days a week.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROCESS ============ -->
+<section id="process" class="py-24 relative overflow-hidden" style="background:#fff;">
+  <div class="blob blob-sky" style="width:450px;height:450px;top:-100px;right:-80px;opacity:0.55;"></div>
+  <div class="max-w-7xl mx-auto px-6 relative z-10">
+    <div class="text-center mb-16 reveal">
+      <div class="badge mb-4" style="background:rgba(37,99,235,0.07);color:#2563eb;border:1px solid rgba(37,99,235,0.12);">How It Works</div>
+      <h2 class="font-heading mb-4" style="font-size:clamp(1.8rem,4vw,2.6rem);font-weight:800;color:#0f1d3b;letter-spacing:-0.5px;">
+        Simple. Streamlined. <span class="grad-text">Stress-Free.</span>
+      </h2>
+      <p class="text-slate-500 max-w-xl mx-auto" style="font-size:16px;">Our 4-step process ensures your documents and bookings are handled efficiently from start to finish.</p>
+    </div>
+
+    <!-- Steps desktop horizontal -->
+    <div class="hidden md:flex items-start gap-4 reveal">
+      <!-- Step 1 -->
+      <div class="flex-1 flex flex-col items-center text-center">
+        <div class="step-dot mb-5" style="background:linear-gradient(135deg,#1a3a8f,#2563eb);color:#fff;">1</div>
+        <div class="w-full h-0.5 absolute" style="display:none;"></div>
+        <h4 class="font-heading mb-2" style="font-weight:700;color:#0f1d3b;font-size:1rem;">Submit Request</h4>
+        <p class="text-slate-500 text-sm leading-relaxed">Fill out our quick form or WhatsApp us with your requirements and destination details.</p>
+      </div>
+      <div class="flex-shrink-0 mt-6" style="flex:0 0 auto;width:80px;height:2px;background:linear-gradient(90deg,#2563eb,#818cf8);margin-top:22px;"></div>
+      <!-- Step 2 -->
+      <div class="flex-1 flex flex-col items-center text-center">
+        <div class="step-dot mb-5" style="background:linear-gradient(135deg,#4f46e5,#818cf8);color:#fff;">2</div>
+        <h4 class="font-heading mb-2" style="font-weight:700;color:#0f1d3b;font-size:1rem;">Document Review</h4>
+        <p class="text-slate-500 text-sm leading-relaxed">Our experts verify your documents and guide you on any additional requirements needed.</p>
+      </div>
+      <div class="flex-shrink-0" style="flex:0 0 auto;width:80px;height:2px;background:linear-gradient(90deg,#818cf8,#38bdf8);margin-top:22px;"></div>
+      <!-- Step 3 -->
+      <div class="flex-1 flex flex-col items-center text-center">
+        <div class="step-dot mb-5" style="background:linear-gradient(135deg,#0891b2,#2563eb);color:#fff;">3</div>
+        <h4 class="font-heading mb-2" style="font-weight:700;color:#0f1d3b;font-size:1rem;">Processing</h4>
+        <p class="text-slate-500 text-sm leading-relaxed">We submit and process your application with real-time updates so you're always informed.</p>
+      </div>
+      <div class="flex-shrink-0" style="flex:0 0 auto;width:80px;height:2px;background:linear-gradient(90deg,#2563eb,#1a3a8f);margin-top:22px;"></div>
+      <!-- Step 4 -->
+      <div class="flex-1 flex flex-col items-center text-center">
+        <div class="step-dot mb-5" style="background:linear-gradient(135deg,#1a3a8f,#4f46e5);color:#fff;">4</div>
+        <h4 class="font-heading mb-2" style="font-weight:700;color:#0f1d3b;font-size:1rem;">Delivery</h4>
+        <p class="text-slate-500 text-sm leading-relaxed">Receive your approved visa, attested document, or e-ticket delivered promptly.</p>
+      </div>
+    </div>
+
+    <!-- Steps mobile vertical -->
+    <div class="flex md:hidden flex-col gap-6">
+      <div class="flex gap-5 items-start reveal">
+        <div class="step-dot flex-shrink-0" style="background:linear-gradient(135deg,#1a3a8f,#2563eb);color:#fff;">1</div>
+        <div>
+          <h4 class="font-heading mb-1" style="font-weight:700;color:#0f1d3b;font-size:1rem;">Submit Request</h4>
+          <p class="text-slate-500 text-sm">Fill out our quick form or WhatsApp us with your requirements.</p>
+        </div>
+      </div>
+      <div class="flex gap-5 items-start reveal">
+        <div class="step-dot flex-shrink-0" style="background:linear-gradient(135deg,#4f46e5,#818cf8);color:#fff;">2</div>
+        <div>
+          <h4 class="font-heading mb-1" style="font-weight:700;color:#0f1d3b;font-size:1rem;">Document Review</h4>
+          <p class="text-slate-500 text-sm">Our experts verify and guide you on any additional requirements.</p>
+        </div>
+      </div>
+      <div class="flex gap-5 items-start reveal">
+        <div class="step-dot flex-shrink-0" style="background:linear-gradient(135deg,#0891b2,#2563eb);color:#fff;">3</div>
+        <div>
+          <h4 class="font-heading mb-1" style="font-weight:700;color:#0f1d3b;font-size:1rem;">Processing</h4>
+          <p class="text-slate-500 text-sm">We submit and process with real-time updates at every step.</p>
+        </div>
+      </div>
+      <div class="flex gap-5 items-start reveal">
+        <div class="step-dot flex-shrink-0" style="background:linear-gradient(135deg,#1a3a8f,#4f46e5);color:#fff;">4</div>
+        <div>
+          <h4 class="font-heading mb-1" style="font-weight:700;color:#0f1d3b;font-size:1rem;">Delivery</h4>
+          <p class="text-slate-500 text-sm">Receive your visa, document, or e-ticket delivered promptly.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIALS ============ -->
+<section id="testimonials" class="py-24 section-alt relative overflow-hidden">
+  <div class="blob blob-blue" style="width:380px;height:380px;bottom:-80px;right:-60px;opacity:0.5;"></div>
+  <div class="max-w-7xl mx-auto px-6 relative z-10">
+    <div class="text-center mb-16 reveal">
+      <div class="badge mb-4" style="background:rgba(37,99,235,0.07);color:#2563eb;border:1px solid rgba(37,99,235,0.12);">Client Reviews</div>
+      <h2 class="font-heading mb-4" style="font-size:clamp(1.8rem,4vw,2.6rem);font-weight:800;color:#0f1d3b;letter-spacing:-0.5px;">
+        Trusted by Real <span class="grad-text">Travellers</span>
+      </h2>
+      <p class="text-slate-500 max-w-lg mx-auto" style="font-size:16px;">Don't take our word for it — hear from clients who've experienced the SR Travels difference.</p>
+    </div>
+
+    <!-- Destination image strip -->
+    <div class="flex gap-4 mb-14 overflow-hidden reveal">
+      <div class="relative flex-1 min-w-0 rounded-2xl overflow-hidden h-40 group">
+        <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=500&q=80&auto=format&fit=crop" alt="Dubai" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+        <div class="absolute inset-0 flex items-end p-4" style="background:linear-gradient(to top,rgba(15,29,59,0.65),transparent);">
+          <span class="text-white font-heading font-700 text-sm" style="font-weight:700;">Dubai, UAE</span>
+        </div>
+      </div>
+      <div class="relative flex-1 min-w-0 rounded-2xl overflow-hidden h-40 group">
+        <img src="https://images.unsplash.com/photo-1586724237569-f3d0c1dee8c6?w=500&q=80&auto=format&fit=crop" alt="Qatar" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+        <div class="absolute inset-0 flex items-end p-4" style="background:linear-gradient(to top,rgba(15,29,59,0.65),transparent);">
+          <span class="text-white font-heading font-700 text-sm" style="font-weight:700;">Doha, Qatar</span>
+        </div>
+      </div>
+      <div class="relative flex-1 min-w-0 rounded-2xl overflow-hidden h-40 group hidden sm:block">
+        <img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=500&q=80&auto=format&fit=crop" alt="Europe" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+        <div class="absolute inset-0 flex items-end p-4" style="background:linear-gradient(to top,rgba(15,29,59,0.65),transparent);">
+          <span class="text-white font-heading font-700 text-sm" style="font-weight:700;">Europe</span>
+        </div>
+      </div>
+      <div class="relative flex-1 min-w-0 rounded-2xl overflow-hidden h-40 group hidden md:block">
+        <img src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=500&q=80&auto=format&fit=crop" alt="India" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+        <div class="absolute inset-0 flex items-end p-4" style="background:linear-gradient(to top,rgba(15,29,59,0.65),transparent);">
+          <span class="text-white font-heading font-700 text-sm" style="font-weight:700;">India</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      <!-- Testimonial 1 -->
+      <div class="testimonial-card p-7 reveal">
+        <div class="flex gap-1 mb-4">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#fbbf24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#fbbf24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#fbbf24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#fbbf24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#fbbf24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="text-slate-600 mb-6 leading-relaxed" style="font-size:15px;">
+          "SR Travels got my UAE visa approved in just 3 days! The team was incredibly helpful and kept me updated throughout. Highly recommend their services."
+        </p>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center font-heading font-700" style="background:linear-gradient(135deg,#1a3a8f,#4f46e5);color:#fff;font-weight:700;font-size:15px;">M</div>
+          <div>
+            <div class="font-heading font-700" style="color:#0f1d3b;font-weight:700;font-size:14px;">Mohamed Shahid</div>
+            <div class="text-xs text-slate-400">Dubai Visa — Approved in 3 days</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Testimonial 2 -->
+      <div class="testimonial-card p-7 reveal" style="transition-delay:0.15s;">
+        <div class="flex gap-1 mb-4">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#fbbf24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#fbbf24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#fbbf24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#fbbf24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#fbbf24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="text-slate-600 mb-6 leading-relaxed" style="font-size:15px;">
+          "The certificate attestation for my degree was done flawlessly. Transparent pricing, no hidden charges — exactly what I was looking for. Will definitely use them again."
+        </p>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center font-heading font-700" style="background:linear-gradient(135deg,#0891b2,#2563eb);color:#fff;font-weight:700;font-size:15px;">P</div>
+          <div>
+            <div class="font-heading font-700" style="color:#0f1d3b;font-weight:700;font-size:14px;">Priya Nair</div>
+            <div class="text-xs text-slate-400">Degree Attestation — MEA & Embassy</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Testimonial 3 -->
+      <div class="testimonial-card p-7 reveal" style="transition-delay:0.3s;">
+        <div class="flex gap-1 mb-4">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#fbbf24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#fbbf24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#fbbf24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#fbbf24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#fbbf24" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="text-slate-600 mb-6 leading-relaxed" style="font-size:15px;">
+          "Best travel agency in Chennai! Booked my family's flights to Doha and they found amazing fares with confirmed seats. Professional team, smooth experience end to end."
+        </p>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center font-heading font-700" style="background:linear-gradient(135deg,#7c3aed,#4f46e5);color:#fff;font-weight:700;font-size:15px;">R</div>
+          <div>
+            <div class="font-heading font-700" style="color:#0f1d3b;font-weight:700;font-size:14px;">Ramesh Kumar</div>
+            <div class="text-xs text-slate-400">Family Flights — Doha, Qatar</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section id="contact" class="py-24 relative overflow-hidden" style="background:#fff;">
+  <div class="blob blob-blue" style="width:500px;height:500px;top:-150px;left:-100px;opacity:0.45;"></div>
+  <div class="blob blob-violet" style="width:350px;height:350px;bottom:-80px;right:-60px;opacity:0.5;"></div>
+  <div class="max-w-7xl mx-auto px-6 relative z-10">
+    <div class="grid lg:grid-cols-2 gap-16 items-start">
+      <!-- Left info -->
+      <div class="reveal">
+        <div class="badge mb-4" style="background:rgba(37,99,235,0.07);color:#2563eb;border:1px solid rgba(37,99,235,0.12);">Get In Touch</div>
+        <h2 class="font-heading mb-4" style="font-size:clamp(1.8rem,4vw,2.6rem);font-weight:800;color:#0f1d3b;letter-spacing:-0.5px;">
+          Let's Plan Your<br/><span class="grad-text">Journey Together</span>
+        </h2>
+        <p class="text-slate-500 mb-8 leading-relaxed" style="font-size:16px;">
+          Whether it's a quick quote or a complex documentation request, our team is ready to assist. Reach out and we'll respond within a few hours.
+        </p>
+
+        <!-- Contact details -->
+        <div class="space-y-5 mb-8">
+          <a href="tel:+919999999999" class="flex items-center gap-4 group">
+            <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 transition-transform group-hover:scale-105" style="background:rgba(37,99,235,0.08);">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+              </svg>
+            </div>
+            <div>
+              <div class="text-xs text-slate-400 mb-0.5">Phone</div>
+              <div class="font-medium" style="color:#0f1d3b;">+91 99999 99999</div>
+            </div>
+          </a>
+          <a href="mailto:info@srtravels.in" class="flex items-center gap-4 group">
+            <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 transition-transform group-hover:scale-105" style="background:rgba(37,99,235,0.08);">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+              </svg>
+            </div>
+            <div>
+              <div class="text-xs text-slate-400 mb-0.5">Email</div>
+              <div class="font-medium" style="color:#0f1d3b;">info@srtravels.in</div>
+            </div>
+          </a>
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style="background:rgba(37,99,235,0.08);">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+              </svg>
+            </div>
+            <div>
+              <div class="text-xs text-slate-400 mb-0.5">Office</div>
+              <div class="font-medium" style="color:#0f1d3b;">T. Nagar, Chennai — Tamil Nadu</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- WhatsApp CTA -->
+        <a href="https://wa.me/919999999999?text=Hi%20SR%20Travels%2C%20I%20need%20assistance%20with%20my%20travel%20requirements." target="_blank" class="flex items-center gap-3 w-full justify-center py-4 rounded-2xl font-heading font-700 text-white transition-all" style="background:linear-gradient(135deg,#25d366,#128c7e);box-shadow:0 4px 20px rgba(37,211,102,0.3);font-weight:700;font-size:15px;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="white">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.097.543 4.066 1.494 5.779L.058 23.625c-.072.383.237.736.627.709l6.078-.376C8.212 24.63 10.06 25 12 25c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.9 0-3.693-.487-5.258-1.341l-.372-.21-3.894.24.303-3.758-.241-.389C1.505 14.856 1 13.485 1 12 1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 10-11 10z"/>
+          </svg>
+          Chat with Us on WhatsApp
+        </a>
+      </div>
+
+      <!-- Right: Form -->
+      <div class="reveal" style="transition-delay:0.2s;">
+        <div class="rounded-2xl p-8" style="background:linear-gradient(145deg,#f8faff,#eef2ff);border:1px solid rgba(37,99,235,0.1);">
+          <h3 class="font-heading mb-6" style="font-weight:700;color:#0f1d3b;font-size:1.2rem;">Send Us a Message</h3>
+          <form id="contact-form" onsubmit="handleSubmit(event)" class="space-y-5">
+            <div>
+              <label class="block text-sm font-medium text-slate-600 mb-2" style="font-family:'Poppins',sans-serif;">Full Name</label>
+              <input type="text" class="form-input" placeholder="Enter your full name" required />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-slate-600 mb-2" style="font-family:'Poppins',sans-serif;">Phone Number</label>
+              <input type="tel" class="form-input" placeholder="+91 98765 43210" required />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-slate-600 mb-2" style="font-family:'Poppins',sans-serif;">Service Required</label>
+              <select class="form-input" required style="appearance:none;cursor:pointer;">
+                <option value="" disabled selected>Select a service</option>
+                <option>Flight Ticket Booking</option>
+                <option>Visa Services</option>
+                <option>Certificate Attestation</option>
+                <option>Multiple Services</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-slate-600 mb-2" style="font-family:'Poppins',sans-serif;">Message</label>
+              <textarea class="form-input" rows="4" placeholder="Tell us about your requirements..." style="resize:none;" required></textarea>
+            </div>
+            <button type="submit" class="btn-primary w-full justify-center">
+              Send Message
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            </button>
+          </form>
+          <div id="form-success" class="hidden text-center py-6">
+            <div class="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-4" style="background:linear-gradient(135deg,#1a3a8f,#2563eb);">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <h4 class="font-heading mb-2" style="font-weight:700;color:#0f1d3b;">Message Sent!</h4>
+            <p class="text-slate-500 text-sm">We'll get back to you within a few hours. Thank you!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer-bg text-white pt-16 pb-8">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="grid md:grid-cols-4 gap-10 pb-12" style="border-bottom:1px solid rgba(255,255,255,0.08);">
+      <!-- Brand -->
+      <div class="md:col-span-1">
+        <a href="#" class="flex items-center gap-2.5 mb-4">
+          <div class="w-9 h-9 rounded-xl flex items-center justify-center" style="background:linear-gradient(135deg,#2563eb,#818cf8);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17.8 19.2L16 11l3.5-3.5C21 6 21 4 19.5 2.5c-1.5-1.5-3.5-1.5-5 0L11 6 2.8 4.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 2 2 2 2 1-1v-3l3-2 5.2 7.3c.3.4.8.5 1.3.3l.5-.3c.4-.2.6-.6.5-1.1z"/>
+            </svg>
+          </div>
+          <span class="font-heading font-700 text-xl text-white" style="font-weight:700;">SR Travels</span>
+        </a>
+        <p class="text-slate-400 text-sm leading-relaxed mb-5">Your trusted partner for flight bookings, visa services, and document attestation. Serving clients across India and the GCC for over 10 years.</p>
+        <!-- Social -->
+        <div class="flex gap-3">
+          <a href="#" class="w-9 h-9 rounded-lg flex items-center justify-center transition-all hover:scale-110" style="background:rgba(255,255,255,0.08);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#94a3b8"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="#" class="w-9 h-9 rounded-lg flex items-center justify-center transition-all hover:scale-110" style="background:rgba(255,255,255,0.08);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="https://wa.me/919999999999" class="w-9 h-9 rounded-lg flex items-center justify-center transition-all hover:scale-110" style="background:rgba(37,211,102,0.2);" target="_blank">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#25d366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.097.543 4.066 1.494 5.779L.058 23.625c-.072.383.237.736.627.709l6.078-.376C8.212 24.63 10.06 25 12 25c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.9 0-3.693-.487-5.258-1.341l-.372-.21-3.894.24.303-3.758-.241-.389C1.505 14.856 1 13.485 1 12 1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 10-11 10z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div>
+        <h4 class="font-heading font-700 mb-4 text-white" style="font-weight:700;font-size:15px;">Quick Links</h4>
+        <ul class="space-y-2.5">
+          <li><a href="#home" class="text-slate-400 text-sm hover:text-white transition-colors">Home</a></li>
+          <li><a href="#services" class="text-slate-400 text-sm hover:text-white transition-colors">Services</a></li>
+          <li><a href="#why-us" class="text-slate-400 text-sm hover:text-white transition-colors">Why Choose Us</a></li>
+          <li><a href="#process" class="text-slate-400 text-sm hover:text-white transition-colors">How It Works</a></li>
+          <li><a href="#testimonials" class="text-slate-400 text-sm hover:text-white transition-colors">Testimonials</a></li>
+          <li><a href="#contact" class="text-slate-400 text-sm hover:text-white transition-colors">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <!-- Services -->
+      <div>
+        <h4 class="font-heading font-700 mb-4 text-white" style="font-weight:700;font-size:15px;">Services</h4>
+        <ul class="space-y-2.5">
+          <li><a href="#contact" class="text-slate-400 text-sm hover:text-white transition-colors">Flight Ticket Booking</a></li>
+          <li><a href="#contact" class="text-slate-400 text-sm hover:text-white transition-colors">Tourist Visa</a></li>
+          <li><a href="#contact" class="text-slate-400 text-sm hover:text-white transition-colors">Work Visa</a></li>
+          <li><a href="#contact" class="text-slate-400 text-sm hover:text-white transition-colors">Student Visa</a></li>
+          <li><a href="#contact" class="text-slate-400 text-sm hover:text-white transition-colors">Degree Attestation</a></li>
+          <li><a href="#contact" class="text-slate-400 text-sm hover:text-white transition-colors">MEA / Embassy Attestation</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div>
+        <h4 class="font-heading font-700 mb-4 text-white" style="font-weight:700;font-size:15px;">Contact</h4>
+        <ul class="space-y-3">
+          <li class="flex items-start gap-3 text-slate-400 text-sm">
+            <svg class="mt-0.5 flex-shrink-0" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            +91 99999 99999
+          </li>
+          <li class="flex items-start gap-3 text-slate-400 text-sm">
+            <svg class="mt-0.5 flex-shrink-0" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            info@srtravels.in
+          </li>
+          <li class="flex items-start gap-3 text-slate-400 text-sm">
+            <svg class="mt-0.5 flex-shrink-0" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            T. Nagar, Chennai,<br/>Tamil Nadu 600017
+          </li>
+          <li class="flex items-start gap-3 text-slate-400 text-sm">
+            <svg class="mt-0.5 flex-shrink-0" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            Mon – Sat: 9:00 AM – 7:00 PM
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p class="text-slate-500 text-sm">© 2025 SR Travels. All rights reserved.</p>
+      <div class="flex gap-6">
+        <a href="#" class="text-slate-500 text-sm hover:text-white transition-colors">Privacy Policy</a>
+        <a href="#" class="text-slate-500 text-sm hover:text-white transition-colors">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- WhatsApp Floating Button -->
+<a href="https://wa.me/919999999999?text=Hi%20SR%20Travels%2C%20I%27d%20like%20to%20enquire%20about%20your%20services." class="wa-float" target="_blank" title="Chat on WhatsApp">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="white">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.097.543 4.066 1.494 5.779L.058 23.625c-.072.383.237.736.627.709l6.078-.376C8.212 24.63 10.06 25 12 25c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.9 0-3.693-.487-5.258-1.341l-.372-.21-3.894.24.303-3.758-.241-.389C1.505 14.856 1 13.485 1 12 1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 10-11 10z"/>
+  </svg>
+</a>
+
+<script>
+  // Mobile menu toggle
+  const menuBtn = document.getElementById('menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const bar1 = document.getElementById('bar1');
+  const bar2 = document.getElementById('bar2');
+  const bar3 = document.getElementById('bar3');
+  let menuOpen = false;
+
+  menuBtn.addEventListener('click', () => {
+    menuOpen = !menuOpen;
+    mobileMenu.classList.toggle('open', menuOpen);
+    if (menuOpen) {
+      bar1.style.transform = 'rotate(45deg) translate(5px, 6px)';
+      bar2.style.opacity = '0';
+      bar3.style.transform = 'rotate(-45deg) translate(5px, -6px)';
+      bar3.style.width = '24px';
+    } else {
+      bar1.style.transform = '';
+      bar2.style.opacity = '';
+      bar3.style.transform = '';
+      bar3.style.width = '';
+    }
+  });
+
+  function closeMobileMenu() {
+    menuOpen = false;
+    mobileMenu.classList.remove('open');
+    bar1.style.transform = '';
+    bar2.style.opacity = '';
+    bar3.style.transform = '';
+    bar3.style.width = '';
+  }
+
+  // Navbar scroll shadow
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (window.scrollY > 20) {
+      nav.style.boxShadow = '0 4px 24px rgba(15,29,59,0.08)';
+    } else {
+      nav.style.boxShadow = 'none';
+    }
+  });
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  reveals.forEach(el => revealObserver.observe(el));
+
+  // Form submit
+  function handleSubmit(e) {
+    e.preventDefault();
+    document.getElementById('contact-form').classList.add('hidden');
+    document.getElementById('form-success').classList.remove('hidden');
+  }
+</script>
+</body>
+</html>
