@@ -904,17 +904,20 @@
           <div class="rounded-2xl p-8" style="background:linear-gradient(145deg,#f8faff,#eef2ff);border:1px solid rgba(37,99,235,0.1);">
             <h3 class="font-heading mb-6" style="font-weight:700;color:#0f1d3b;font-size:1.2rem;">Send Us a Message</h3>
             <form id="contact-form" onsubmit="handleSubmit(event)" class="space-y-5">
+              
               <div>
                 <label class="block text-sm font-medium text-slate-600 mb-2" style="font-family:'Poppins',sans-serif;">Full Name</label>
-                <input type="text" class="form-input" placeholder="Enter your full name" required />
+                <input type="text" id="name"  class="form-input" placeholder="Enter your full name" required />
               </div>
+              
               <div>
                 <label class="block text-sm font-medium text-slate-600 mb-2" style="font-family:'Poppins',sans-serif;">Phone Number</label>
-                <input type="tel" class="form-input" placeholder="+91 98765 43210" required />
+                <input type="tel" id="number" class="form-input" placeholder="+91 98765 43210" required />
               </div>
+              
               <div>
                 <label class="block text-sm font-medium text-slate-600 mb-2" style="font-family:'Poppins',sans-serif;">Service Required</label>
-                <select class="form-input" required style="appearance:none;cursor:pointer;">
+                <select id="servicer" class="form-input" required style="appearance:none;cursor:pointer;">
                   <option value="" disabled selected>Select a service</option>
                   <option>Flight Ticket Booking</option>
                   <option>Visa Services</option>
@@ -922,11 +925,12 @@
                   <option>Multiple Services</option>
                 </select>
               </div>
+              
               <div>
                 <label class="block text-sm font-medium text-slate-600 mb-2" style="font-family:'Poppins',sans-serif;">Message</label>
-                <textarea class="form-input" rows="4" placeholder="Tell us about your requirements..." style="resize:none;" required></textarea>
+                <textarea class="form-input" id="message" rows="4" placeholder="Tell us about your requirements..." style="resize:none;" required></textarea>
               </div>
-              <button type="submit" class="btn-primary w-full justify-center">
+              <button type="submit" onclick="sendMail()" class="btn-primary w-full justify-center">
                 Send Message
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
               </button>
@@ -1009,7 +1013,7 @@
             </li>
             <li class="flex items-start gap-3 text-slate-400 text-sm">
               <svg class="mt-0.5 flex-shrink-0" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-              info@srtravels.in
+              srgroups@outlook.in
             </li>
             <li class="flex items-start gap-3 text-slate-400 text-sm">
               <svg class="mt-0.5 flex-shrink-0" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
@@ -1106,5 +1110,30 @@
       document.getElementById('form-success').classList.remove('hidden');
     }
   </script>
+
+    <script type="text/javascript"
+            src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+    </script>
+    <script type="text/javascript">
+    (function(){
+        emailjs.init({
+            publicKey: "LW8YpiBhAybUpzzuj",
+        });
+    })();
+
+    function sendMail(){
+        let parms = {
+            name : document.getElementById("name").value,
+            number : document.getElementById("number").value,
+            servicer : document.getElementById("servicer").value,
+            message : document.getElementById("message").value,
+        }
+
+        emailjs.send("service_byn0ils","template_07cmobs",parms)
+    }
+
+    </script>
+
+
   </body>
   </html>
