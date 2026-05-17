@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Certificate Attestation — SRS Travels</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <style>
+    :root{--navy:#0b1629;--navy2:#0f1e38;--navy3:#162445;--gold:#c8973a;--gold2:#e8b456;--white:#ffffff;--muted:#8a9bbf;--border:rgba(200,151,58,0.25);--shadow:0 8px 40px rgba(0,0,0,0.45);--radius:16px;}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Poppins',sans-serif;background:white;color:rgb(255, 255, 255);min-height:100vh;}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:18px 48px;background:rgba(255, 255, 255, 0.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
+    .nav-logo{font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--gold2);text-decoration:none;}
+    .nav-logo span{color:var(--white);}
+    .nav-back{color:var(--muted);font-size:.9rem;text-decoration:none;transition:color .2s;}
+    .nav-back:hover{color:var(--gold2);}
+    .hero{padding:120px 48px 60px;text-align:center;background:white;position:relative;overflow:hidden;}
+    .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(200,151,58,0.08) 0%,transparent 70%);}
+    .badge{display:inline-flex;align-items:center;gap:8px;background:rgba(200,151,58,0.12);border:1px solid var(--border);border-radius:100px;padding:6px 18px;font-size:.8rem;color:var(--gold2);letter-spacing:.06em;text-transform:uppercase;margin-bottom:20px;}
+    .hero h1{font-family:'Poppins',serif;color:rgb(0, 0, 0); font-size:clamp(2rem,5vw,3.5rem);line-height:1.15;margin-bottom:12px;}
+    .hero p{color:var(--muted);}
+    .main{max-width:1060px;margin:0 auto;padding:48px 24px 80px;}
+    h2.section-title{font-family:'Poppins',serif;font-size:1.6rem;color:rgb(255, 255, 255);margin-bottom:24px;}
+
+        /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 50; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 40px;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
+    .nav-logo { font-size: 1.2rem; color: #0f1d3b; font-weight: 700; text-decoration: none; }
+    .nav-back {
+      display: flex; align-items: center; gap: 6px;
+      color: #333; font-size: .85rem; text-decoration: none;
+    }
+    .nav-back svg { width: 15px; height: 15px; }
+
+    /* SERVICE SELECTOR */
+    .service-selector{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;margin-bottom:48px;}
+    .service-box{background:var(--navy2);border:1px solid var(--border);border-radius:var(--radius);padding:28px;cursor:pointer;transition:all .25s;position:relative;}
+    .service-box:hover,.service-box.selected{border-color:var(--gold);transform:translateY(-3px);}
+    .service-box.selected::after{content:'✓';position:absolute;top:14px;right:14px;width:26px;height:26px;border-radius:50%;background:var(--gold);color:var(--navy);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:.85rem;}
+    .sb-icon{font-size:2rem;margin-bottom:14px;}
+    .sb-title{font-weight:700;font-size:1rem;margin-bottom:6px;}
+    .sb-desc{font-size:.8rem;color:var(--muted);line-height:1.5;margin-bottom:14px;}
+    .sb-examples{display:flex;flex-wrap:wrap;gap:6px;}
+    .sb-ex{padding:3px 10px;border-radius:100px;background:rgba(200,151,58,0.1);border:1px solid var(--border);font-size:.72rem;color:var(--muted);}
+
+    /* ATTESTATION PATH */
+    .path-section{background:var(--navy2);border:1px solid var(--border);border-radius:var(--radius);padding:36px;margin-bottom:48px;}
+    .path-tabs{display:flex;gap:8px;margin-bottom:28px;flex-wrap:wrap;}
+    .path-tab{padding:8px 20px;border-radius:100px;border:1px solid var(--border);background:transparent;color:var(--muted);font-size:.85rem;cursor:pointer;transition:all .2s;}
+    .path-tab.active{background:rgba(200,151,58,0.15);border-color:var(--gold);color:var(--gold2);}
+    .path-flow{display:flex;align-items:center;gap:0;flex-wrap:wrap;}
+    .pf-step{background:var(--navy3);border:1px solid var(--border);border-radius:10px;padding:14px 18px;text-align:center;min-width:130px;}
+    .pf-step-num{font-size:.7rem;color:var(--gold);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;}
+    .pf-step-name{font-size:.88rem;font-weight:600;}
+    .pf-arrow{color:var(--gold);font-size:1.2rem;padding:0 8px;}
+
+    /* APPLY CTA */
+    .apply-cta{linear-gradient(135deg, #1a3a8f 0%, #2563eb 50%, #818cf8 100%);border:1px solid var(--border);border-radius:var(--radius);padding:48px;text-align:center;margin-bottom:48px;}
+    .apply-cta h2{font-family:'Poppins',serif;font-size:1.8rem;margin-bottom:12px;}
+    .apply-cta h2 span{color:var(--gold2);}
+    .apply-cta p{color:rgb(96, 96, 96);margin-bottom:28px;}
+    .cta-btn{padding:16px 40px;border-radius:12px;background:linear-gradient(135deg,var(--gold),var(--gold2));border:none;color:var(--navy);font-family:'Poppins',sans-serif;font-size:1rem;font-weight:700;cursor:pointer;transition:all .25s;box-shadow:0 4px 20px rgba(200,151,58,0.3);}
+    .cta-btn:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(200,151,58,0.45);}
+
+    /* MODAL */
+    .modal-overlay{position:fixed;inset:0;z-index:300;background:rgba(0,0,0,0.75);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s;}
+    .modal-overlay.open{opacity:1;pointer-events:all;}
+    .modal{background:var(--navy2);border:1px solid var(--border);border-radius:20px;padding:40px;width:100%;max-width:540px;max-height:90vh;overflow-y:auto;transform:translateY(30px);transition:transform .3s;box-shadow:var(--shadow);}
+    .modal-overlay.open .modal{transform:translateY(0);}
+    .modal h2{font-family:'Playfair Display',serif;font-size:1.6rem;margin-bottom:6px;}
+    .modal h2 span{color:var(--gold2);}
+    .modal-sub{color:var(--muted);font-size:.88rem;margin-bottom:24px;}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+    .form-row.full{grid-template-columns:1fr;}
+    .form-group{display:flex;flex-direction:column;gap:6px;}
+    .form-group label{font-size:.78rem;color:var(--gold);text-transform:uppercase;letter-spacing:.06em;}
+    .form-group input,.form-group select,.form-group textarea{background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:10px;padding:11px 14px;color:var(--white);font-family:'Poppins',sans-serif;font-size:.9rem;outline:none;transition:border-color .2s;}
+    .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--gold2);}
+    .form-group select option{background:var(--navy2);}
+    .form-group textarea{resize:vertical;min-height:70px;}
+    .modal-actions{display:flex;gap:12px;margin-top:24px;}
+    .btn-cancel{flex:1;padding:13px;border-radius:10px;border:1px solid var(--border);background:transparent;color:var(--muted);font-family:'Poppins',sans-serif;font-size:.9rem;cursor:pointer;transition:all .2s;}
+    .btn-cancel:hover{border-color:var(--gold);color:var(--gold2);}
+    .btn-submit{flex:2;padding:13px;border-radius:10px;background:linear-gradient(135deg,var(--gold),var(--gold2));border:none;color:var(--navy);font-family:'Poppins',sans-serif;font-size:.9rem;font-weight:700;cursor:pointer;transition:all .25s;}
+    .btn-submit:hover{transform:translateY(-2px);}
+    .btn-submit:disabled{opacity:.6;cursor:not-allowed;transform:none;}
+    .success-state{text-align:center;padding:20px 0;display:none;}
+    .success-state.show{display:block;}
+    .success-icon{width:72px;height:72px;border-radius:50%;background:rgba(200,151,58,0.15);border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:2rem;}
+    .success-state h3{font-family:'Playfair Display',serif;font-size:1.5rem;margin-bottom:10px;}
+    .success-state p{color:var(--muted);font-size:.9rem;line-height:1.6;}
+    .whatsapp-btn{display:inline-flex;align-items:center;gap:8px;margin-top:20px;padding:12px 24px;border-radius:10px;background:#25d366;color:#fff;text-decoration:none;font-weight:600;font-size:.9rem;}
+    .footer-note{text-align:center;padding:24px;font-size:.8rem;color:rgb(89, 89, 89);border-top:1px solid rgba(255,255,255,0.04);}
+    .footer-note a{color:#2563eb;text-decoration:none;}
+    .checklist{margin-top:20px;}
+    .checklist li{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:.88rem;color:var(--muted);}
+    .checklist li::before{content:'✓';color:var(--gold2);font-weight:700;flex-shrink:0;}
+
+    .grad-text {
+      background: linear-gradient(135deg, #1a3a8f 0%, #2563eb 50%, #818cf8 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+
+    .blob {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(80px);
+        pointer-events: none;
+        z-index: 0;
+        animation: float 8s ease-in-out infinite;
+      }
+      .blob-blue { background: radial-gradient(circle, rgba(37,99,235,0.18) 0%, rgba(99,102,241,0.1) 100%); }
+      .blob-violet { background: radial-gradient(circle, rgba(124,58,237,0.13) 0%, rgba(59,130,246,0.08) 100%); }
+      .blob-sky { background: radial-gradient(circle, rgba(56,189,248,0.15) 0%, rgba(37,99,235,0.06) 100%); }
+
+  </style>
+</head>
+<body>
+
+<nav>
+  <span style="font-weight:700;font-size:1.15rem;color:#0f1d3b;">SRS <span style="background:linear-gradient(135deg,#2563eb,#818cf8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Travels</span></span>
+  <a class="nav-back" href="index.html">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    Back to Home
+  </a>
+</nav>
+
+<div class="hero">
+  <div class="blob blob-blue" style="width:600px;height:600px;top:-120px;right:-100px;animation-delay:0s;"></div>
+  <div class="blob blob-violet" style="width:400px;height:400px;bottom:-80px;left:-60px;animation-delay:2s;"></div>
+  <div class="blob blob-sky" style="width:300px;height:300px;top:40%;left:40%;animation-delay:4s;"></div>
+  <div class="badge">📜 Certificate Attestation</div>
+  <h1>Document <span class="grad-text">Attestation</span>,<br/>End-to-End</h1>
+  <p>MEA, HRD, Embassy & Apostille — all handled with full transparency and real-time tracking.</p>
+</div>
+
+<div class="main">
+  <div class="blob blob-blue" style="width:600px;height:600px;top:-120px;right:-100px;animation-delay:0s;"></div>
+  <div class="blob blob-violet" style="width:400px;height:400px;bottom:-80px;left:-60px;animation-delay:2s;"></div>
+  <div class="blob blob-sky" style="width:300px;height:300px;top:40%;left:40%;animation-delay:4s;"></div>
+
+  <!-- SERVICE TYPE SELECTION -->
+  <h2 class="section-title" style="color: black;">Select <span class="grad-text">Document Type</span></h2>
+  <div class="service-selector" id="serviceSelector">
+    <div class="service-box selected" onclick="selectService(this,'Educational')" data-service="Educational">
+      <div class="sb-icon">🎓</div>
+      <div class="sb-title">Educational Certificates</div>
+      <div class="sb-desc">Degree, diploma and mark sheet attestation for work and study abroad.</div>
+      <div class="sb-examples">
+        <span class="sb-ex">Degree Certificate</span><span class="sb-ex">Diploma</span><span class="sb-ex">Marksheets</span><span class="sb-ex">School Certificates</span>
+      </div>
+    </div>
+    <div class="service-box" onclick="selectService(this,'Personal')" data-service="Personal">
+      <div class="sb-icon">👤</div>
+      <div class="sb-title">Personal Documents</div>
+      <div class="sb-desc">Birth, marriage, death, police clearance and other personal certificates.</div>
+      <div class="sb-examples">
+        <span class="sb-ex">Birth Certificate</span><span class="sb-ex">Marriage Certificate</span><span class="sb-ex">PCC</span><span class="sb-ex">Death Certificate</span>
+      </div>
+    </div>
+    <div class="service-box" onclick="selectService(this,'Commercial')" data-service="Commercial">
+      <div class="sb-icon">🏢</div>
+      <div class="sb-title">Commercial Documents</div>
+      <div class="sb-desc">Company registration, power of attorney, and trade-related document attestation.</div>
+      <div class="sb-examples">
+        <span class="sb-ex">Company Registration</span><span class="sb-ex">Board Resolution</span><span class="sb-ex">Power of Attorney</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ATTESTATION PATH -->
+  <div class="path-section">
+    <div class="blob blob-blue" style="width:600px;height:600px;top:-120px;right:-100px;animation-delay:0s;"></div>
+    <div class="blob blob-violet" style="width:400px;height:400px;bottom:-80px;left:-60px;animation-delay:2s;"></div>
+    <div class="blob blob-sky" style="width:300px;height:300px;top:40%;left:40%;animation-delay:4s;"></div>
+    <h2 class="section-title">Attestation Process Flow</h2>
+    <div class="path-tabs" id="pathTabs">
+      <button class="path-tab active" onclick="showPath('uae',this)">UAE / GCC</button>
+      <button class="path-tab" onclick="showPath('apostille',this)">Apostille Countries</button>
+      <button class="path-tab" onclick="showPath('uk',this)">UK / Europe</button>
+    </div>
+    <div id="pathFlow" class="path-flow"></div>
+    <ul class="checklist" id="docChecklist"></ul>
+  </div>
+
+  <!-- CTA -->
+  <div class="apply-cta">
+    <h2 style="color: black;">Ready to <span class="grad-text ">Get Started?</span></h2>
+    <p>Share your document details and we'll guide you through the entire process — from HRD to Embassy stamp.</p>
+    <button class="cta-btn" onclick="openModal()">Start Your Attestation →</button>
+  </div>
+
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeOutside(event)">
+  <div class="modal">
+    <div id="formState">
+      <h2>Attestation <span>Request</span></h2>
+      <p class="modal-sub">Fill in the details below. Our agent will call you within 2 hours with timeline and fees.</p>
+      <div class="form-row">
+        <div class="form-group"><label>Document Type *</label>
+          <select id="a_doctype">
+            <option>Degree Certificate</option><option>Diploma</option><option>Marksheet</option>
+            <option>Birth Certificate</option><option>Marriage Certificate</option>
+            <option>Police Clearance Certificate</option><option>Company Registration</option>
+            <option>Power of Attorney</option><option>Other</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Destination Country *</label>
+          <select id="a_country">
+            <option>UAE</option><option>Qatar</option><option>Kuwait</option><option>Oman</option>
+            <option>Bahrain</option><option>Saudi Arabia</option><option>UK</option>
+            <option>USA</option><option>Australia</option><option>Canada</option><option>Other</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Attestation Type *</label>
+          <select id="a_type">
+            <option>MEA + Embassy</option><option>HRD + MEA + Embassy</option>
+            <option>Apostille</option><option>Notary Only</option><option>Not Sure</option>
+          </select>
+        </div>
+        <div class="form-group"><label>No. of Documents</label>
+          <select id="a_count">
+            <option>1</option><option>2</option><option>3</option><option>4</option><option>5+</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Full Name *</label><input id="a_name" placeholder="Your full name"/></div>
+        <div class="form-group"><label>Phone / WhatsApp *</label><input id="a_phone" placeholder="+91 XXXXX XXXXX"/></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Email</label><input type="email" id="a_email" placeholder="your@email.com"/></div>
+        <div class="form-group"><label>Urgency</label>
+          <select id="a_urgency">
+            <option>Normal (7-14 days)</option><option>Urgent (3-5 days)</option><option>Super Urgent (1-2 days)</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row full">
+        <div class="form-group"><label>Additional Info</label>
+          <textarea id="a_notes" placeholder="e.g. state of issue, university name, any prior attempts…"></textarea>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button class="btn-cancel" onclick="closeModal()">Back</button>
+        <button class="btn-submit" id="submitBtn" onclick="submitAttestation()">Submit Request →</button>
+      </div>
+    </div>
+    <div class="success-state" id="successState">
+      <div class="success-icon">✅</div>
+      <h3>Request Received!</h3>
+      <p>We'll call you within <strong>2 hours</strong> with the document checklist, fees, and estimated timeline.</p>
+      <a class="whatsapp-btn" href="https://wa.me/918939020867" target="_blank">💬 Chat on WhatsApp</a><br/>
+      <button class="btn-cancel" style="margin-top:14px;width:100%;display:block;" onclick="resetModal()">Submit Another Request</button>
+    </div>
+  </div>
+</div>
+
+<div class="footer-note">© 2025 <a href="index.html">SRS Travels</a> — T. Nagar, Chennai &nbsp;|&nbsp; <a href="tel:+918939020867">+91 89390 20867</a> &nbsp;|&nbsp; <a href="mailto:srgroups@outlook.in">srgroups@outlook.in</a></div>
+
+<script>
+emailjs.init('YOUR_EMAILJS_PUBLIC_KEY');
+
+const PATHS = {
+  uae: {
+    steps:['Notary','HRD / Home Dept.','MEA (New Delhi)','UAE Embassy','MOFA (UAE)'],
+    docs:['Original certificate','Passport copy','2 passport photos','Application form','Previous attestation (if any)']
+  },
+  apostille:{
+    steps:['Notary','HRD / Home Dept.','MEA Apostille Stamp'],
+    docs:['Original certificate','Passport copy','Application form','Demand draft / fee payment']
+  },
+  uk:{
+    steps:['Notary','MEA','UK High Commission'],
+    docs:['Original certificate','Passport copy','Covering letter','Purpose of attestation letter']
+  }
+};
+
+function showPath(key, btn) {
+  document.querySelectorAll('.path-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  const p = PATHS[key];
+  const flow = document.getElementById('pathFlow');
+  flow.innerHTML = p.steps.map((s,i) =>
+    `<div class="pf-step"><div class="pf-step-num">Step ${i+1}</div><div class="pf-step-name">${s}</div></div>` +
+    (i < p.steps.length-1 ? '<div class="pf-arrow">›</div>' : '')
+  ).join('');
+  const cl = document.getElementById('docChecklist');
+  cl.innerHTML = '<p style="font-size:.8rem;color:var(--gold);text-transform:uppercase;letter-spacing:.06em;margin:16px 0 8px">Required Documents</p>' +
+    p.docs.map(d => `<li>${d}</li>`).join('');
+}
+
+function selectService(el, name) {
+  document.querySelectorAll('.service-box').forEach(b => b.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+function openModal() { document.getElementById('modalOverlay').classList.add('open'); }
+function closeModal() { document.getElementById('modalOverlay').classList.remove('open'); }
+function closeOutside(e) { if(e.target===document.getElementById('modalOverlay')) closeModal(); }
+function resetModal() {
+  document.getElementById('formState').style.display='';
+  document.getElementById('successState').classList.remove('show');
+  closeModal();
+}
+
+async function submitAttestation() {
+  const name = document.getElementById('a_name').value.trim();
+  const phone = document.getElementById('a_phone').value.trim();
+  if (!name) { alert('Please enter your name.'); return; }
+  if (!phone) { alert('Please enter your phone number.'); return; }
+  const btn = document.getElementById('submitBtn');
+  btn.disabled=true; btn.textContent='Sending…';
+
+  const wa_msg = encodeURIComponent(
+    `📜 ATTESTATION REQUEST — SRS Travels\n\n` +
+    `Document: ${document.getElementById('a_doctype').value}\n` +
+    `Country: ${document.getElementById('a_country').value}\n` +
+    `Type: ${document.getElementById('a_type').value}\n` +
+    `No. of Docs: ${document.getElementById('a_count').value}\n` +
+    `Urgency: ${document.getElementById('a_urgency').value}\n\n` +
+    `Name: ${name}\nPhone: ${phone}\n` +
+    `Email: ${document.getElementById('a_email').value||'N/A'}\n` +
+    `Notes: ${document.getElementById('a_notes').value||'None'}`
+  );
+
+  try {
+    await emailjs.send('YOUR_SERVICE_ID','YOUR_TEMPLATE_ID',{
+      to_email:'srgroups@outlook.in', service_type:'Attestation',
+      from_name:name, from_phone:phone,
+      from_email:document.getElementById('a_email').value||'N/A',
+      doc_type:document.getElementById('a_doctype').value,
+      country:document.getElementById('a_country').value,
+      attestation_type:document.getElementById('a_type').value,
+      doc_count:document.getElementById('a_count').value,
+      urgency:document.getElementById('a_urgency').value,
+      notes:document.getElementById('a_notes').value||'None',
+    });
+    showSuccess();
+  } catch(err) {
+    window.open(`https://wa.me/918939020867?text=${wa_msg}`,'_blank');
+    showSuccess();
+  }
+  btn.disabled=false; btn.textContent='Submit Request →';
+}
+function showSuccess() {
+  document.getElementById('formState').style.display='none';
+  document.getElementById('successState').classList.add('show');
+}
+
+// Init
+showPath('uae', document.querySelector('.path-tab'));
+</script>
+</body>
+</html>
