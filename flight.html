@@ -854,17 +854,42 @@ function fillRoute(fromCode, toCode, fromCity, toCity) {
 }
 
 function openModal() {
-  if (!document.getElementById('fromCode').value) { alert('Please select a departure airport.'); return; }
-  if (!document.getElementById('toCode').value)   { alert('Please select a destination airport.'); return; }
-  if (!document.getElementById('departDate').value){ alert('Please select a departure date.'); return; }
+
+  if (!selectedFrom.code) {
+    alert('Please select a departure airport.');
+    return;
+  }
+
+  if (!selectedTo.code) {
+    alert('Please select a destination airport.');
+    return;
+  }
+
+  if (!document.getElementById('departDate').value) {
+    alert('Please select a departure date.');
+    return;
+  }
+
   const fromVal = document.getElementById('fromInput').value;
-  const toVal   = document.getElementById('toInput').value;
-  document.getElementById('s_from').value   = `${fromVal} (${document.getElementById('fromCode').value})`;
-  document.getElementById('s_to').value     = `${toVal} (${document.getElementById('toCode').value})`;
-  document.getElementById('s_depart').value = document.getElementById('departDate').value;
-  document.getElementById('s_return').value = document.getElementById('returnDate').value || 'One Way';
-  document.getElementById('s_class').value  = cabinClass;
-  document.getElementById('s_pax').value    = `${passengers} Passenger${passengers>1?'s':''}`;
+  const toVal = document.getElementById('toInput').value;
+
+  document.getElementById('s_from').value =
+    `${fromVal} (${selectedFrom.code})`;
+
+  document.getElementById('s_to').value =
+    `${toVal} (${selectedTo.code})`;
+
+  document.getElementById('s_depart').value =
+    document.getElementById('departDate').value;
+
+  document.getElementById('s_return').value =
+    document.getElementById('returnDate').value || 'One Way';
+
+  document.getElementById('s_class').value = cabinClass;
+
+  document.getElementById('s_pax').value =
+    `${passengers} Passenger${passengers > 1 ? 's' : ''}`;
+
   document.getElementById('modalOverlay').classList.add('open');
 }
 
