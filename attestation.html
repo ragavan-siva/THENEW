@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Certificate Attestation — SRS Travels</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>  <title>Certificate Attestation — SRS Travels</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
@@ -52,16 +51,6 @@
     .sb-examples{display:flex;flex-wrap:wrap;gap:6px;}
     .sb-ex{padding:3px 10px;border-radius:100px;background:rgba(200,151,58,0.1);border:1px solid var(--border);font-size:.72rem;color:var(--muted);}
 
-    /* ATTESTATION PATH */
-    .path-section{background:var(--navy2);border:1px solid var(--border);border-radius:var(--radius);padding:36px;margin-bottom:48px;}
-    .path-tabs{display:flex;gap:8px;margin-bottom:28px;flex-wrap:wrap;}
-    .path-tab{padding:8px 20px;border-radius:100px;border:1px solid var(--border);background:transparent;color:var(--muted);font-size:.85rem;cursor:pointer;transition:all .2s;}
-    .path-tab.active{background:rgba(200,151,58,0.15);border-color:var(--gold);color:var(--gold2);}
-    .path-flow{display:flex;align-items:center;gap:0;flex-wrap:wrap;}
-    .pf-step{background:var(--navy3);border:1px solid var(--border);border-radius:10px;padding:14px 18px;text-align:center;min-width:130px;}
-    .pf-step-num{font-size:.7rem;color:var(--gold);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;}
-    .pf-step-name{font-size:.88rem;font-weight:600;}
-    .pf-arrow{color:var(--gold);font-size:1.2rem;padding:0 8px;}
 
     /* APPLY CTA */
     .apply-cta{linear-gradient(135deg, #1a3a8f 0%, #2563eb 50%, #818cf8 100%);border:1px solid var(--border);border-radius:var(--radius);padding:48px;text-align:center;margin-bottom:48px;}
@@ -122,6 +111,131 @@
       .blob-violet { background: radial-gradient(circle, rgba(124,58,237,0.13) 0%, rgba(59,130,246,0.08) 100%); }
       .blob-sky { background: radial-gradient(circle, rgba(56,189,248,0.15) 0%, rgba(37,99,235,0.06) 100%); }
 
+      /* ========================================
+   PERFECT MOBILE RESPONSIVE FIX
+======================================== */
+
+@media screen and (max-width: 768px) {
+
+  html,
+  body {
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  nav {
+    padding: 14px 16px;
+  }
+
+  .hero {
+    padding: 100px 16px 40px;
+  }
+
+  .main {
+    padding: 24px 14px 60px;
+  }
+
+  /* Service cards */
+  .service-selector {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .service-box {
+    padding: 20px;
+  }
+
+  /* CTA section */
+  .apply-cta {
+    padding: 28px 18px;
+  }
+
+  .apply-cta h2 {
+    font-size: 1.7rem;
+    line-height: 1.3;
+  }
+
+  /* Modal overlay */
+  .modal-overlay {
+    align-items: flex-end;
+    padding: 0;
+  }
+
+  /* Modal */
+  .modal {
+
+    width: 100vw !important;
+    max-width: 100vw !important;
+
+    height: 100dvh;
+
+    margin: 0;
+
+    border-radius: 22px 22px 0 0;
+
+    padding: 20px 14px 100px !important;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    box-sizing: border-box;
+  }
+
+  /* Single column form */
+  .form-row {
+    display: flex !important;
+    flex-direction: column !important;
+
+    width: 100%;
+
+    gap: 14px;
+  }
+
+  .form-group {
+    width: 100%;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+
+    width: 100% !important;
+    max-width: 100% !important;
+
+    min-height: 52px;
+
+    padding: 14px;
+
+    font-size: 16px !important;
+
+    box-sizing: border-box;
+
+    border-radius: 12px;
+  }
+
+  .form-group textarea {
+    min-height: 100px;
+  }
+
+  /* Buttons */
+  .modal-actions {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .btn-submit,
+  .btn-cancel {
+    width: 100%;
+    min-height: 52px;
+  }
+
+  /* Prevent overflow */
+  * {
+    max-width: 100%;
+  }
+
+}
+    
   </style>
 </head>
 <body>
@@ -171,18 +285,7 @@
     </div>
   </div>
 
-  <!-- ATTESTATION PATH -->
-  <div class="path-section">
-    <div class="blob blob-sky" style="width:300px;height:300px;top:40%;left:40%;animation-delay:4s;"></div>
-    <h2 class="section-title">Attestation Process Flow</h2>
-    <div class="path-tabs" id="pathTabs">
-      <button class="path-tab active" onclick="showPath('uae',this)">UAE / GCC</button>
-      <button class="path-tab" onclick="showPath('apostille',this)">Apostille Countries</button>
-      <button class="path-tab" onclick="showPath('uk',this)">UK / Europe</button>
-    </div>
-    <div id="pathFlow" class="path-flow"></div>
-    <ul class="checklist" id="docChecklist"></ul>
-  </div>
+ 
 
   <!-- CTA -->
   <div class="apply-cta">
@@ -266,95 +369,6 @@
 <script>
 emailjs.init('YOUR_EMAILJS_PUBLIC_KEY');
 
-const PATHS = {
-  uae: {
-    steps:['Notary','HRD / Home Dept.','MEA (New Delhi)','UAE Embassy','MOFA (UAE)'],
-    docs:['Original certificate','Passport copy','2 passport photos','Application form','Previous attestation (if any)']
-  },
-  apostille:{
-    steps:['Notary','HRD / Home Dept.','MEA Apostille Stamp'],
-    docs:['Original certificate','Passport copy','Application form','Demand draft / fee payment']
-  },
-  uk:{
-    steps:['Notary','MEA','UK High Commission'],
-    docs:['Original certificate','Passport copy','Covering letter','Purpose of attestation letter']
-  }
-};
-
-function showPath(key, btn) {
-  document.querySelectorAll('.path-tab').forEach(t => t.classList.remove('active'));
-  btn.classList.add('active');
-  const p = PATHS[key];
-  const flow = document.getElementById('pathFlow');
-  flow.innerHTML = p.steps.map((s,i) =>
-    `<div class="pf-step"><div class="pf-step-num">Step ${i+1}</div><div class="pf-step-name">${s}</div></div>` +
-    (i < p.steps.length-1 ? '<div class="pf-arrow">›</div>' : '')
-  ).join('');
-  const cl = document.getElementById('docChecklist');
-  cl.innerHTML = '<p style="font-size:.8rem;color:var(--gold);text-transform:uppercase;letter-spacing:.06em;margin:16px 0 8px">Required Documents</p>' +
-    p.docs.map(d => `<li>${d}</li>`).join('');
-}
-
-function selectService(el, name) {
-  document.querySelectorAll('.service-box').forEach(b => b.classList.remove('selected'));
-  el.classList.add('selected');
-}
-
-function openModal() { document.getElementById('modalOverlay').classList.add('open'); }
-function closeModal() { document.getElementById('modalOverlay').classList.remove('open'); }
-function closeOutside(e) { if(e.target===document.getElementById('modalOverlay')) closeModal(); }
-function resetModal() {
-  document.getElementById('formState').style.display='';
-  document.getElementById('successState').classList.remove('show');
-  closeModal();
-}
-
-async function submitAttestation() {
-  const name = document.getElementById('a_name').value.trim();
-  const phone = document.getElementById('a_phone').value.trim();
-  if (!name) { alert('Please enter your name.'); return; }
-  if (!phone) { alert('Please enter your phone number.'); return; }
-  const btn = document.getElementById('submitBtn');
-  btn.disabled=true; btn.textContent='Sending…';
-
-  const wa_msg = encodeURIComponent(
-    `📜 ATTESTATION REQUEST — SRS Travels\n\n` +
-    `Document: ${document.getElementById('a_doctype').value}\n` +
-    `Country: ${document.getElementById('a_country').value}\n` +
-    `Type: ${document.getElementById('a_type').value}\n` +
-    `No. of Docs: ${document.getElementById('a_count').value}\n` +
-    `Urgency: ${document.getElementById('a_urgency').value}\n\n` +
-    `Name: ${name}\nPhone: ${phone}\n` +
-    `Email: ${document.getElementById('a_email').value||'N/A'}\n` +
-    `Notes: ${document.getElementById('a_notes').value||'None'}`
-  );
-
-  try {
-    await emailjs.send('YOUR_SERVICE_ID','YOUR_TEMPLATE_ID',{
-      to_email:'srgroups@outlook.in', service_type:'Attestation',
-      from_name:name, from_phone:phone,
-      from_email:document.getElementById('a_email').value||'N/A',
-      doc_type:document.getElementById('a_doctype').value,
-      country:document.getElementById('a_country').value,
-      attestation_type:document.getElementById('a_type').value,
-      doc_count:document.getElementById('a_count').value,
-      urgency:document.getElementById('a_urgency').value,
-      notes:document.getElementById('a_notes').value||'None',
-    });
-    showSuccess();
-  } catch(err) {
-    window.open(`https://wa.me/918939020867?text=${wa_msg}`,'_blank');
-    showSuccess();
-  }
-  btn.disabled=false; btn.textContent='Submit Request →';
-}
-function showSuccess() {
-  document.getElementById('formState').style.display='none';
-  document.getElementById('successState').classList.add('show');
-}
-
-// Init
-showPath('uae', document.querySelector('.path-tab'));
 </script>
 </body>
 </html>
