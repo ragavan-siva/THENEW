@@ -368,6 +368,81 @@
 
 <script>
 emailjs.init('YOUR_EMAILJS_PUBLIC_KEY');
+  
+function showPath(key, btn) {
+  document.querySelectorAll('.path-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  const p = PATHS[key];
+  const flow = document.getElementById('pathFlow');
+  flow.innerHTML = p.steps.map((s,i) =>
+    `<div class="pf-step"><div class="pf-step-num">Step ${i+1}</div><div class="pf-step-name">${s}</div></div>` +
+    (i < p.steps.length-1 ? '<div class="pf-arrow">›</div>' : '')
+  ).join('');
+  const cl = document.getElementById('docChecklist');
+  cl.innerHTML = '<p style="font-size:.8rem;color:var(--gold);text-transform:uppercase;letter-spacing:.06em;margin:16px 0 8px">Required Documents</p>' +
+    p.docs.map(d => `<li>${d}</li>`).join('');
+}
+
+function selectService(el, name) {
+  document.querySelectorAll('.service-box').forEach(b => b.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+function openModal() { document.getElementById('modalOverlay').classList.add('open'); }
+function closeModal() { document.getElementById('modalOverlay').classList.remove('open'); }
+function closeOutside(e) { if(e.target===document.getElementById('modalOverlay')) closeModal(); }
+function resetModal() {
+  document.getElementById('formState').style.display='';
+  document.getElementById('successState').classList.remove('show');
+  closeModal();
+}
+
+async function submitAttestation() {
+  const name = document.getElementById('a_name').value.trim();
+  const phone = document.getElementById('a_phone').value.trim();
+  if (!name) { alert('Please enter your name.'); return; }
+  if (!phone) { alert('Please enter your phone number.'); return; }
+  const btn = document.getElementById('submitBtn');
+  btn.disabled=true; btn.textContent='Sending…';
+
+  const wa_msg = encodeURIComponent(
+    `📜 ATTESTATION REQUEST — SRS Travels\n\n` +
+    `Document: ${document.getElementById('a_doctype').value}\n` +
+    `Country: ${document.getElementById('a_country').value}\n` +
+    `Type: ${document.getElementById('a_type').value}\n` +
+    `No. of Docs: ${document.getElementById('a_count').value}\n` +
+    `Urgency: ${document.getElementById('a_urgency').value}\n\n` +
+    `Name: ${name}\nPhone: ${phone}\n` +
+    `Email: ${document.getElementById('a_email').value||'N/A'}\n` +
+    `Notes: ${document.getElementById('a_notes').value||'None'}`
+  );
+
+  try {
+    await emailjs.send('YOUR_SERVICE_ID','YOUR_TEMPLATE_ID',{
+      to_email:'srgroups@outlook.in', service_type:'Attestation',
+      from_name:name, from_phone:phone,
+      from_email:document.getElementById('a_email').value||'N/A',
+      doc_type:document.getElementById('a_doctype').value,
+      country:document.getElementById('a_country').value,
+      attestation_type:document.getElementById('a_type').value,
+      doc_count:document.getElementById('a_count').value,
+      urgency:document.getElementById('a_urgency').value,
+      notes:document.getElementById('a_notes').value||'None',
+    });
+    showSuccess();
+  } catch(err) {
+    window.open(`https://wa.me/918939020867?text=${wa_msg}`,'_blank');
+    showSuccess();
+  }
+  btn.disabled=false; btn.textContent='Submit Request →';
+}
+function showSuccess() {
+  document.getElementById('formState').style.display='none';
+  document.getElementById('successState').classList.add('show');
+}
+
+// Init
+showPath('uae', document.querySelector('.path-tab'));
 
 </script>
 </body>
