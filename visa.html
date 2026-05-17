@@ -254,6 +254,80 @@
       
       }
 
+    /* =========================
+   PERFECT MOBILE FIT FIX
+========================= */
+
+@media (max-width: 768px) {
+
+  html,
+  body {
+    overflow-x: hidden;
+  }
+
+  .modal-overlay {
+    padding: 0;
+    align-items: flex-end;
+  }
+
+  .modal {
+    width: 100%;
+    max-width: 100%;
+    height: 100vh;
+    max-height: 100vh;
+
+    margin: 0;
+    border-radius: 20px 20px 0 0;
+
+    padding: 20px 14px 100px;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .form-group {
+    width: 100%;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    max-width: 100%;
+
+    min-height: 52px;
+
+    font-size: 16px;
+    padding: 14px;
+
+    border-radius: 12px;
+  }
+
+  .form-group textarea {
+    min-height: 100px;
+  }
+
+  .modal-actions {
+    flex-direction: column;
+  }
+
+  .btn-submit,
+  .btn-cancel {
+    width: 100%;
+    min-height: 52px;
+  }
+
+  * {
+    max-width: 100%;
+  }
+
+}
+
   </style>
 </head>
 <body>
